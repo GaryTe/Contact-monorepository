@@ -35,7 +35,12 @@
       "options": {
         "targetName": "test"
       },
-      "exclude": ["apps/user-e2e/**/*"]
+      "exclude": [
+        "apps/user-e2e/**/*",
+        "apps/publication-e2e/**/*",
+        "apps/publication/src/app/video-e2e/**/*",
+        "apps/publication/src/app/text-e2e/**/*"
+      ]
     }
   ]
 }

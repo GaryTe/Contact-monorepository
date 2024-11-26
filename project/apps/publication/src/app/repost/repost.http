@@ -1,0 +1,2 @@
+# Создание видео
+POST  http://localhost:3000/api/repost/?idUser=1982&idPublication=9 HTTP/1.1

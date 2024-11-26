@@ -1,0 +1,50 @@
+generator client {
+  provider = "prisma-client-js"
+  output = "../../../node_modules/.prisma/client"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Publication {
+  id               Int    @id @default(autoincrement())
+  preview          String?
+  text             String?
+  photo            String?
+  description      String?
+  additional       AdditionalData?
+  comments         Comment[]
+
+  @@map("publications")
+}
+
+model AdditionalData {
+  id                    Int    @id @default(autoincrement())
+  idUser                String @map("id_user")
+  name                  String?
+  link                  String?
+  tags                  String?
+  state                 String @default("Черновик")
+  repost                String?
+  originalIdUser        String? @map("original_id_user")
+  originalIdPublication String? @map("original_id_publication")
+  dataCreation          DateTime @default(now()) @map("data_creation")
+  dataPublication       DateTime @updatedAt @map("data_publication")
+  publication           Publication  @relation(fields: [publicationId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  publicationId         Int @unique @map("publication_id")
+
+  @@map("additional_data")
+}
+
+model Comment {
+  id               Int    @id @default(autoincrement())
+  text             String
+  idUser           String
+  dataCreation     DateTime @default(now()) @map("data_creation")
+  publication      Publication  @relation(fields: [publicationId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  publicationId    Int @map("publication_id")
+
+  @@map("comments")
+}

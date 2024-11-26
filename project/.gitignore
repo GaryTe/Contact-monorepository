@@ -41,5 +41,5 @@ Thumbs.db
 .nx/cache
 .nx/workspace-data
 
-# user microserver
-project/apps/user/src/.env
+# Environments
+*.env

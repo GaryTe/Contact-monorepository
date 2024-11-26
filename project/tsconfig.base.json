@@ -17,7 +17,11 @@
     "paths": {
       "@project/config-user": ["shared/config-user/src/index.ts"],
       "@project/consts": ["shared/consts/src/index.ts"],
+      "@project/enum": ["shared/enum/src/index.ts"],
       "@project/helpers": ["shared/helpers/src/index.ts"],
+      "@project/prisma-publication.configuration": [
+        "shared/prisma-publication.configuration/src/index.ts"
+      ],
       "@project/typs": ["shared/typs/src/index.ts"]
     }
   },

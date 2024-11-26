@@ -1,0 +1,27 @@
+# Создание цитаты
+POST  http://localhost:3000/api/quote/1984 HTTP/1.1
+Content-Type: application/json
+
+{
+  "text": "Запуск !!!",
+  "name": "Vlad"
+}
+
+###
+# Получение детальной информации по цитате
+GET   http://localhost:3000/api/quote/10 HTTP/1.1
+
+###
+## Редактирование цитаты
+PATCH  http://localhost:3000/api/quote/?idUser=1984&idQuote=10 HTTP/1.1
+Content-Type: application/json
+
+{
+  "tags": [
+    "Опубликовано"
+    ]
+}
+
+###
+## Удаление цитаты
+DELETE   http://localhost:3000/api/quote/?idUser=1984&idQuote=10 HTTP/1.1
