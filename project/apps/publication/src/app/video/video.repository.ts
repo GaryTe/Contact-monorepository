@@ -4,6 +4,7 @@ import {PrismaClientService} from '@project/prisma-publication.configuration';
 import {BlogVideoEntity} from './blog-video.entity';
 import {Publication, DataQueryVideo} from '@project/typs';
 import {UpdateVideoDto} from './index';
+import {TypePublication} from '@project/enum';
 
 @Injectable()
 export class VideoRepository {
@@ -19,16 +20,21 @@ export class VideoRepository {
           additional: {
             create: {
               ...dataVideo,
+              type: TypePublication.Video,
               tags: dataVideo.tags ? dataVideo.tags.join(',') : undefined
             }
           },
         comments: {
           connect: []
+        },
+        likes: {
+          connect: []
         }
       },
       include: {
         additional: true,
-        comments: true
+        comments: true,
+        likes: true
       }
     });
 
@@ -40,7 +46,8 @@ export class VideoRepository {
       where: {id: idVideo},
       include: {
         additional: true,
-        comments: true
+        comments: true,
+        likes: true
       }
     });
 
@@ -72,7 +79,8 @@ export class VideoRepository {
       },
       include: {
         additional: true,
-        comments: true
+        comments: true,
+        likes: true
       }
     });
 
@@ -89,7 +97,8 @@ export class VideoRepository {
       },
       include: {
         additional: true,
-        comments: true
+        comments: true,
+        likes: true
       }
     });
 

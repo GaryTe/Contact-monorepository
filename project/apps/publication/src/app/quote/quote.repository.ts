@@ -4,6 +4,7 @@ import {PrismaClientService} from '@project/prisma-publication.configuration';
 import {BlogQuoteEntity} from './blog-quote.entity';
 import {Publication, DataQueryQuote} from '@project/typs';
 import {UpdateQuoteDto} from './index';
+import {TypePublication} from '@project/enum';
 
 @Injectable()
 export class QuoteRepository {
@@ -22,16 +23,21 @@ export class QuoteRepository {
               idUser: dataQuote.idUser,
               name: dataQuote.name,
               state: dataQuote.state ? dataQuote.state : undefined,
+              type: TypePublication.Quote,
               tags: dataQuote.tags ? dataQuote.tags.join(',') : undefined
             }
           },
         comments: {
           connect: []
+        },
+        likes: {
+          connect: []
         }
       },
       include: {
         additional: true,
-        comments: true
+        comments: true,
+        likes: true
       }
     });
 
@@ -43,7 +49,8 @@ export class QuoteRepository {
       where: {id: idQuote},
       include: {
         additional: true,
-        comments: true
+        comments: true,
+        likes: true
       }
     });
 
@@ -77,7 +84,8 @@ export class QuoteRepository {
       },
       include: {
         additional: true,
-        comments: true
+        comments: true,
+        likes: true
       }
     });
 
@@ -94,7 +102,8 @@ export class QuoteRepository {
       },
       include: {
         additional: true,
-        comments: true
+        comments: true,
+        likes: true
       }
     });
 

@@ -4,6 +4,7 @@ import {PrismaClientService} from '@project/prisma-publication.configuration';
 import {BlogTextEntity} from './blog-text.entity';
 import {Publication, DataQueryText} from '@project/typs';
 import {UpdateTextDto} from './index';
+import {TypePublication} from '@project/enum';
 
 @Injectable()
 export class TextRepository {
@@ -23,16 +24,21 @@ export class TextRepository {
               idUser: dataText.idUser,
               name: dataText.name,
               state: dataText.state ? dataText.state : undefined,
+              type: TypePublication.Text,
               tags: dataText.tags ? dataText.tags.join(',') : undefined
             }
           },
         comments: {
           connect: []
+        },
+        likes: {
+          connect: []
         }
       },
       include: {
         additional: true,
-        comments: true
+        comments: true,
+        likes: true
       }
     });
 
@@ -44,7 +50,8 @@ export class TextRepository {
       where: {id: idText},
       include: {
         additional: true,
-        comments: true
+        comments: true,
+        likes: true
       }
     });
 
@@ -79,7 +86,8 @@ export class TextRepository {
       },
       include: {
         additional: true,
-        comments: true
+        comments: true,
+        likes: true
       }
     });
 
@@ -96,7 +104,8 @@ export class TextRepository {
       },
       include: {
         additional: true,
-        comments: true
+        comments: true,
+        likes: true
       }
     });
 

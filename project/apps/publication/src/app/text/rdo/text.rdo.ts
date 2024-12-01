@@ -39,4 +39,8 @@ export class TextRdo {
   @Expose()
   @Transform(({value}) => value.length)
   public comments: number;
+
+  @Expose()
+  @Transform(({value}) => value.length)
+  public likes: number;
 }

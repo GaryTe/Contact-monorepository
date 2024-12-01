@@ -7,6 +7,9 @@ import {QuoteModule} from './quote/quote.module';
 import {LinkModule} from './link/link.module';
 import {RepostModule} from './repost/repost.module';
 import {CommentModule} from './comment/comment.module';
+import {LikeModule} from './like/like.module';
+import {FindPublicationModule} from './find-publication/find-publication.module';
+import {ListPublicationModule} from './list-publication/list-publication.module';
 
 @Module({
   imports: [
@@ -16,7 +19,10 @@ import {CommentModule} from './comment/comment.module';
     QuoteModule,
     LinkModule,
     RepostModule,
-    CommentModule
+    CommentModule,
+    LikeModule,
+    FindPublicationModule,
+    ListPublicationModule
   ]
 })
 export class AppModule {}

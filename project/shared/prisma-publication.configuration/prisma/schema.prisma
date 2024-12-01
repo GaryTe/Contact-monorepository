@@ -1,6 +1,7 @@
 generator client {
   provider = "prisma-client-js"
   output = "../../../node_modules/.prisma/client"
+  previewFeatures = ["fullTextSearch"]
 }
 
 datasource db {
@@ -16,6 +17,7 @@ model Publication {
   description      String?
   additional       AdditionalData?
   comments         Comment[]
+  likes            like[]
 
   @@map("publications")
 }
@@ -32,6 +34,7 @@ model AdditionalData {
   originalIdPublication String? @map("original_id_publication")
   dataCreation          DateTime @default(now()) @map("data_creation")
   dataPublication       DateTime @updatedAt @map("data_publication")
+  type                  String?
   publication           Publication  @relation(fields: [publicationId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   publicationId         Int @unique @map("publication_id")
 
@@ -41,10 +44,18 @@ model AdditionalData {
 model Comment {
   id               Int    @id @default(autoincrement())
   text             String
-  idUser           String
+  idUser           String @map("id_user")
   dataCreation     DateTime @default(now()) @map("data_creation")
   publication      Publication  @relation(fields: [publicationId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   publicationId    Int @map("publication_id")
 
   @@map("comments")
+}
+
+model like {
+  id               Int    @id @default(autoincrement())
+  idUser           String @map("id_user")
+  like             Boolean?
+  publication      Publication  @relation(fields: [publicationId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  publicationId    Int @map("publication_id")
 }

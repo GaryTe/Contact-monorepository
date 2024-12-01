@@ -1,0 +1,2 @@
+# Получение like
+GET   http://localhost:3000/api/find/Vlad HTTP/1.1

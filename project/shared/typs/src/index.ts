@@ -6,3 +6,5 @@ export * from './lib/quote-type';
 export * from './lib/link-type';
 export * from './lib/repost-type';
 export * from './lib/comment-type';
+export * from './lib/like-type';
+export * from './lib/list-type';
