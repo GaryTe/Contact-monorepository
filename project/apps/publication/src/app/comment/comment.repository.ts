@@ -25,9 +25,21 @@ export class CommentRepository {
     return record;
   }
 
-  public async getAllComment(idPublication: number): Promise<DetailInformationComment[]> {
+  public async getAllComment({
+    idPublication,
+    limit,
+    page
+  }: {
+    idPublication: number;
+    limit: number;
+    page: number;
+  }): Promise<DetailInformationComment[] | []> {
     return await this.client.comment.findMany({
-      where: {publicationId: idPublication}
+      where: {
+        publicationId: idPublication
+      },
+      take: Number(limit),
+      skip: Number(page) > 0 ? Number(page) : undefined
     });
   }
 

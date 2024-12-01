@@ -4,6 +4,7 @@ import {PrismaClientService} from '@project/prisma-publication.configuration';
 import {BlogPhotoEntity} from './blog-photo.entity';
 import {Publication, DataQueryPhoto} from '@project/typs';
 import {UpdatePhotoDto} from './index';
+import {TypePublication} from '@project/enum';
 
 @Injectable()
 export class PhotoRepository {
@@ -21,16 +22,21 @@ export class PhotoRepository {
             create: {
               idUser: dataPhoto.idUser,
               state: dataPhoto.state ? dataPhoto.state : undefined,
+              type: TypePublication.Photo,
               tags: dataPhoto.tags ? dataPhoto.tags.join(',') : undefined
             }
           },
         comments: {
           connect: []
+        },
+        likes: {
+          connect: []
         }
       },
       include: {
         additional: true,
-        comments: true
+        comments: true,
+        likes: true
       }
     });
 
@@ -42,7 +48,8 @@ export class PhotoRepository {
       where: {id: idPhoto},
       include: {
         additional: true,
-        comments: true
+        comments: true,
+        likes: true
       }
     });
 
@@ -75,7 +82,8 @@ export class PhotoRepository {
       },
       include: {
         additional: true,
-        comments: true
+        comments: true,
+        likes: true
       }
     });
 
@@ -92,7 +100,8 @@ export class PhotoRepository {
       },
       include: {
         additional: true,
-        comments: true
+        comments: true,
+        likes: true
       }
     });
 

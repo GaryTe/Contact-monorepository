@@ -4,6 +4,11 @@ class AdditionalData {
   @Expose()
   public idUser: string;
 
+  @Transform(({value, obj}) => value ?? obj.key)
+  @Expose()
+  public name: string;
+
+  @Transform(({value, obj}) => value ?? obj.key)
   @Expose()
   public link: string;
 
@@ -15,17 +20,42 @@ class AdditionalData {
   public state: string;
 
   @Expose()
+  public repost: string;
+
+  @Expose()
+  public originalIdUser: string;
+
+  @Expose()
+  public originalIdPublication: string;
+
+  @Expose()
   public dataCreation: Date;
 
   @Expose()
   public dataPublication: Date;
+
+  @Expose()
+  public type: string
 }
 
 
-export class LinkRdo {
+export class DetailInformationRdo {
   @Expose()
   public id: number;
 
+  @Transform(({value, obj}) => value ?? obj.key)
+  @Expose()
+  public preview: string;
+
+  @Transform(({value, obj}) => value ?? obj.key)
+  @Expose()
+  public text: string;
+
+  @Transform(({value, obj}) => value ?? obj.key)
+  @Expose()
+  public photo: string;
+
+  @Transform(({value, obj}) => value ?? obj.key)
   @Expose()
   public description: string;
 

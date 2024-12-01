@@ -1,4 +1,12 @@
-import { Controller, Body, Post, Get, Param, Query, Patch } from '@nestjs/common';
+import {
+  Controller,
+  Body,
+  Post,
+  Get,
+  Param,
+  Query,
+  Patch
+} from '@nestjs/common';
 
 import {UserActionsService} from './user-actions.service';
 import {CreateUserDto, UserRdo, AuthorizationUserDto, UserControllerInterface} from './index';

@@ -4,6 +4,7 @@ import {PrismaClientService} from '@project/prisma-publication.configuration';
 import {BlogLinkEntity} from './blog-link.entity';
 import {Publication, DataQueryLink} from '@project/typs';
 import {UpdateLinkDto} from './index';
+import {TypePublication} from '@project/enum';
 
 @Injectable()
 export class LinkRepository {
@@ -22,16 +23,21 @@ export class LinkRepository {
               idUser: dataLink.idUser,
               link: dataLink.link,
               state: dataLink.state ? dataLink.state : undefined,
+              type: TypePublication.Link,
               tags: dataLink.tags ? dataLink.tags.join(',') : undefined
             }
           },
         comments: {
           connect: []
+        },
+        likes: {
+          connect: []
         }
       },
       include: {
         additional: true,
-        comments: true
+        comments: true,
+        likes: true
       }
     });
 
@@ -43,7 +49,8 @@ export class LinkRepository {
       where: {id: idLink},
       include: {
         additional: true,
-        comments: true
+        comments: true,
+        likes: true
       }
     });
 
@@ -77,7 +84,8 @@ export class LinkRepository {
       },
       include: {
         additional: true,
-        comments: true
+        comments: true,
+        likes: true
       }
     });
 
@@ -94,7 +102,8 @@ export class LinkRepository {
       },
       include: {
         additional: true,
-        comments: true
+        comments: true,
+        likes: true
       }
     });
 

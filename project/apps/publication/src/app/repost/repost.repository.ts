@@ -33,7 +33,8 @@ export class RepostRepository {
       where: {id: Number(idPublication)},
       include: {
         additional: true,
-        comments: true
+        comments: true,
+        likes: true
       }
     });
 
@@ -69,7 +70,8 @@ export class RepostRepository {
       },
       include: {
         additional: true,
-        comments: true
+        comments: true,
+        likes: true
       }
     });
 
