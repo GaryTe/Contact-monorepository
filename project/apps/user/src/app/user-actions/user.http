@@ -15,10 +15,9 @@ POST  http://localhost:3000/api/user/registration HTTP/1.1
 Content-Type: application/json
 
 {
-  "name": "Vlad",
+  "name": "Vlad Sazonov",
   "email": "Vlad@mail.com",
-  "avatar": "http://localhost:3000/upload/b01a423d-0ac8-46d7-a50b-f005c4525080.jpg",
-  "password": "4891SP"
+  "password": "1984Vlad"
 }
 
 ###
@@ -28,13 +27,13 @@ Content-Type: application/json
 
 {
   "email": "Vlad@mail.com",
-  "password": "4891SP"
+  "password": "1984Vlad"
 }
 
 ###
 ## Сменить пароль пользователя
-PATCH  http://localhost:3000/api/user/change/6739bb343e957e84efeb5e5b?oldPassword=4891SP&newPassword=4891 HTTP/1.1
+PATCH  http://localhost:3000/api/user/change/674ef86bbbe20f079fdb30bd?oldPassword=4891SP&newPassword=489187 HTTP/1.1
 
 ###
 ## Запросить детальную информацию по определенному пользователю
-GET http://localhost:3000/api/user/6739bb343e957e84efeb5e56 HTTP/1.1
+GET http://localhost:3000/api/user/674ef86bbbe20f079fdb30bd HTTP/1.1

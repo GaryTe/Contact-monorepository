@@ -1,16 +1,16 @@
 # Создание Комментария
-POST  http://localhost:3000/api/comment/1988 HTTP/1.1
+POST  http://localhost:3000/api/comment/674ef86bbbe20f079fdb30bd HTTP/1.1
 Content-Type: application/json
 
 {
-  "text": "Комментарий создан",
-  "idPublication": 7
+  "text": "This is photo is cool !!!. Me like",
+  "idPublication": 31
 }
 
 ###
 # Получение  списка комментариев
-GET   http://localhost:3000/api/comment/5 HTTP/1.1
+GET   http://localhost:3000/api/comment/31 HTTP/1.1
 
 ###
 ## Удаление комментария
-DELETE   http://localhost:3000/api/comment/?idUser=1988&idComment=1 HTTP/1.1
+DELETE   http://localhost:3000/api/comment/?idUser=674ef86bbbe20f079fdb30bd&idComment=1 HTTP/1.1

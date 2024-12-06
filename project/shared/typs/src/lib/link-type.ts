@@ -1,6 +1,6 @@
 export type DataLink = {
   link: string;
-  description: string;
+  description?: string;
   tags?: string[];
   state?: string;
   idUser: string;

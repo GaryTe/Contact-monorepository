@@ -4,6 +4,7 @@ import {QuoteRepository} from './quote.repository';
 import {DataQuote, Publication , DataQueryQuote} from '@project/typs';
 import {BlogQuoteEntity} from './blog-quote.entity';
 import {UpdateQuoteDto} from './index';
+import {filterTags} from '@project/helpers';
 
 @Injectable()
 export class QuoteService {
@@ -12,7 +13,11 @@ export class QuoteService {
   ) {}
 
   public async create(dto: DataQuote): Promise<Publication> {
-    const dataQuote = new BlogQuoteEntity(dto);
+    const tagsList = filterTags(dto.tags);
+    const dataQuote = new BlogQuoteEntity({
+      ...dto,
+      tags: tagsList
+    });
 
     return await this.quoteRepository.create(dataQuote);
   }
@@ -22,7 +27,11 @@ export class QuoteService {
   }
 
   public async editing(query: DataQueryQuote, dto: UpdateQuoteDto): Promise<Publication> {
-    return await this.quoteRepository.editing(query, dto);
+    const tagsList = filterTags(dto.tags);
+    return await this.quoteRepository.editing(
+      query,
+      {...dto, tags: tagsList}
+    );
   }
 
   public async delet(query: DataQueryQuote): Promise<Publication> {

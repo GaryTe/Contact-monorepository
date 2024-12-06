@@ -3,7 +3,8 @@ import { Controller, Get, Query, Param } from '@nestjs/common';
 import {ListPublicationService} from './list-publication.service';
 import {DetailInformationRdo} from './rdo/detail-information.rdo';
 import {fillDTO} from '@project/helpers';
-import {DataQueryList} from '@project/typs';
+import {DataQueryList} from './data-query-list';
+import {DataParamUser} from '../video/data-param-user';
 
 @Controller('/list')
 export class ListPublicationController {
@@ -19,8 +20,8 @@ export class ListPublicationController {
   }
 
   @Get('/:idUser')
-  public async list(@Param('idUser') idUser: string): Promise<DetailInformationRdo> {
-    const dataPublicationsList = await this.listPublicationService.list(idUser);
+  public async list(@Param() param: DataParamUser): Promise<DetailInformationRdo> {
+    const dataPublicationsList = await this.listPublicationService.list(param.idUser);
 
     return fillDTO(DetailInformationRdo, dataPublicationsList)
   }

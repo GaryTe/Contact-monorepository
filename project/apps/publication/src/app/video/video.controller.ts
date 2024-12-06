@@ -1,10 +1,21 @@
-import { Controller, Post, Body, Param, Get, Patch, Query, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Post,
+  Body,
+  Param,
+  Get,
+  Patch,
+  Query,
+  Delete,
+  ParseIntPipe
+ } from '@nestjs/common';
 
 import {VideoService} from './video.service';
 import {CreateVideoDto, UpdateVideoDto} from './index';
 import {VideoRdo, DetailInformationRdo} from './index';
 import {fillDTO} from '@project/helpers';
-import {DataQueryVideo} from '@project/typs';
+import {DataQueryVideo} from './data-query-video';
+import {DataParamUser} from './data-param-user';
 
 @Controller('/video')
 export class VideoController {
@@ -15,15 +26,15 @@ export class VideoController {
   @Post('/:idUser')
   public async create(
     @Body() dto: CreateVideoDto,
-    @Param('idUser') idUser: string
+    @Param() param: DataParamUser
   ): Promise<VideoRdo> {
-    const dataVideo = await this.videoService.create({...dto, idUser});
+    const dataVideo = await this.videoService.create({...dto, idUser: param.idUser});
     return fillDTO(VideoRdo, dataVideo)
   }
 
   @Get('/:idVideo')
-  public async show(@Param('idVideo') idVideo: string): Promise<DetailInformationRdo> {
-    const dataVideo = await this.videoService.show(Number(idVideo));
+  public async show(@Param('idVideo', ParseIntPipe) idVideo: number): Promise<DetailInformationRdo> {
+    const dataVideo = await this.videoService.show(idVideo);
     return fillDTO(DetailInformationRdo, dataVideo)
   }
 

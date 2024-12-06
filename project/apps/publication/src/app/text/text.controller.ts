@@ -1,10 +1,21 @@
-import { Controller, Post, Body, Param, Get, Patch, Query, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Post,
+  Body,
+  Param,
+  Get,
+  Patch,
+  Query,
+  Delete,
+  ParseIntPipe
+ } from '@nestjs/common';
 
 import {TextService} from './text.service';
 import { CreateTextDto, UpdateTextDto } from './index';
 import { TextRdo, DetailInformationRdo } from './index';
 import {fillDTO} from '@project/helpers';
-import {DataQueryText} from '@project/typs';
+import {DataQueryText} from './data-query-text';
+import {DataParamUser} from '../video/data-param-user';
 
 @Controller('/text')
 export class TextController {
@@ -15,15 +26,15 @@ export class TextController {
   @Post('/:idUser')
   public async create(
     @Body() dto: CreateTextDto,
-    @Param('idUser') idUser: string
+    @Param() param: DataParamUser
   ): Promise<TextRdo> {
-    const dataText = await this.textService.create({...dto, idUser});
+    const dataText = await this.textService.create({...dto, idUser: param.idUser});
     return fillDTO(TextRdo, dataText)
   }
 
   @Get('/:idText')
-  public async show(@Param('idText') idText: string): Promise<DetailInformationRdo> {
-    const dataText = await this.textService.show(Number(idText));
+  public async show(@Param('idText', ParseIntPipe) idText: number): Promise<DetailInformationRdo> {
+    const dataText = await this.textService.show(idText);
     return fillDTO(DetailInformationRdo, dataText)
   }
 

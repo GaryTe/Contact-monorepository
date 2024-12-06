@@ -4,6 +4,7 @@ import {TextRepository} from './text.repository';
 import {DataText, Publication , DataQueryText} from '@project/typs';
 import {BlogTextEntity} from './blog-text.entity';
 import {UpdateTextDto} from './index';
+import {filterTags} from '@project/helpers';
 
 @Injectable()
 export class TextService {
@@ -12,7 +13,11 @@ export class TextService {
   ) {}
 
   public async create(dto: DataText): Promise<Publication> {
-    const dataText = new BlogTextEntity(dto);
+    const tagsList = filterTags(dto.tags);
+    const dataText = new BlogTextEntity({
+      ...dto,
+      tags: tagsList
+    });
 
     return await this.textRepository.create(dataText);
   }
@@ -22,7 +27,11 @@ export class TextService {
   }
 
   public async editing(query: DataQueryText, dto: UpdateTextDto): Promise<Publication> {
-    return await this.textRepository.editing(query, dto);
+    const tagsList = filterTags(dto.tags);
+    return await this.textRepository.editing(
+      query,
+      {...dto, tags: tagsList}
+    );
   }
 
   public async delet(query: DataQueryText): Promise<Publication> {

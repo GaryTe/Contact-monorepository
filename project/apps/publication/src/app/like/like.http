@@ -1,6 +1,6 @@
 # Создание и удаление like
-POST  http://localhost:3000/api/like/?idUser=1984&idPublication=1&idLike=9 HTTP/1.1
+POST  http://localhost:3000/api/like/?idUser=674ef86bbbe20f079fdb30bd&idPublication=31&idLike=12 HTTP/1.1
 
 ###
 # Получение like
-GET   http://localhost:3000/api/like/?idUser=1984&idPublication=1 HTTP/1.1
+GET   http://localhost:3000/api/like/?idUser=674ef86bbbe20f079fdb30bd&idPublication=31 HTTP/1.1

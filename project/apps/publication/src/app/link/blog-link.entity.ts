@@ -2,7 +2,7 @@ import {DataLink} from '@project/typs';
 
 export class BlogLinkEntity {
   private link: string;
-  private description: string;
+  private description?: string;
   private tags?: string[];
   private state?: string;
   private idUser: string;

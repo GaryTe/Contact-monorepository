@@ -4,6 +4,7 @@ import {LinkRepository} from './link.repository';
 import {DataLink, Publication , DataQueryLink} from '@project/typs';
 import {BlogLinkEntity} from './blog-link.entity';
 import {UpdateLinkDto} from './index';
+import {filterTags} from '@project/helpers';
 
 @Injectable()
 export class LinkService {
@@ -12,7 +13,11 @@ export class LinkService {
   ) {}
 
   public async create(dto: DataLink): Promise<Publication> {
-    const dataLink = new BlogLinkEntity(dto);
+    const tagsList = filterTags(dto.tags);
+    const dataLink = new BlogLinkEntity({
+      ...dto,
+      tags: tagsList
+    });
 
     return await this.linkRepository.create(dataLink);
   }
@@ -22,7 +27,11 @@ export class LinkService {
   }
 
   public async editing(link: DataQueryLink, dto: UpdateLinkDto): Promise<Publication> {
-    return await this.linkRepository.editing(link, dto);
+    const tagsList = filterTags(dto.tags);
+    return await this.linkRepository.editing(
+      link,
+      {...dto, tags: tagsList}
+    );
   }
 
   public async delet(link: DataQueryLink): Promise<Publication> {

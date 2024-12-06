@@ -1,10 +1,21 @@
-import { Controller, Post, Body, Param, Get, Patch, Query, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Post,
+  Body,
+  Param,
+  Get,
+  Patch,
+  Query,
+  Delete,
+  ParseIntPipe
+} from '@nestjs/common';
 
 import {LinkService} from './link.service';
 import { CreateLinkDto, UpdateLinkDto } from './index';
 import { LinkRdo, DetailInformationRdo } from './index';
 import {fillDTO} from '@project/helpers';
-import {DataQueryLink} from '@project/typs';
+import {DataQueryLink} from './data-query-link';
+import {DataParamUser} from '../video/data-param-user';
 
 @Controller('/link')
 export class LinkController {
@@ -15,15 +26,15 @@ export class LinkController {
   @Post('/:idUser')
   public async create(
     @Body() dto: CreateLinkDto,
-    @Param('idUser') idUser: string
+    @Param() param: DataParamUser
   ): Promise<LinkRdo> {
-    const dataLink = await this.linkService.create({...dto, idUser});
+    const dataLink = await this.linkService.create({...dto, idUser: param.idUser});
     return fillDTO(LinkRdo, dataLink)
   }
 
   @Get('/:idLink')
-  public async show(@Param('idLink') idLink: string): Promise<DetailInformationRdo> {
-    const dataLink = await this.linkService.show(Number(idLink));
+  public async show(@Param('idLink', ParseIntPipe) idLink: number): Promise<DetailInformationRdo> {
+    const dataLink = await this.linkService.show(idLink);
     return fillDTO(DetailInformationRdo, dataLink)
   }
 

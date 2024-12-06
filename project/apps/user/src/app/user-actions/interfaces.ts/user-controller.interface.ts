@@ -9,5 +9,5 @@ export interface UserControllerInterface {
   create(dto: CreateUserDto): Promise<UserRdo>;
   authentication(dto: AuthorizationUserDto): Promise<{token: string}>;
   change(query: DataQueryUser, param: DataParamUser): Promise<void>;
-  show(idUser: string): Promise<UserRdo>;
+  show(param: DataParamUser): Promise<UserRdo>;
 }

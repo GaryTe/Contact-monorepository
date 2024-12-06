@@ -21,7 +21,7 @@ export class BlogUserEntity implements UserInterface {
     this.passwordHash = data.password ? this.setPassword(data.password) : data.passwordHash
   }
 
-  public setPassword(password: string): string {
+  public setPassword(password: string ): string {
     const salt = genSaltSync(SALT_ROUNDS);
     const passwordHash = hashSync(password, salt);
     return passwordHash;

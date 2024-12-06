@@ -9,8 +9,14 @@ import {
 } from '@nestjs/common';
 
 import {UserActionsService} from './user-actions.service';
-import {CreateUserDto, UserRdo, AuthorizationUserDto, UserControllerInterface} from './index';
-import {DataQueryUser, DataParamUser} from '@project/typs';
+import {
+  CreateUserDto,
+  UserRdo,
+  AuthorizationUserDto,
+  UserControllerInterface,
+  DataParamUser,
+  DataQueryUser
+} from './index';
 import {fillDTO} from '@project/helpers';
 
 @Controller('/user/')
@@ -40,8 +46,8 @@ public async change(
 }
 
 @Get(':idUser')
-public async show(@Param('idUser') idUser: string): Promise<UserRdo> {
-  const dataUser = await this.userActionsService.show(idUser);
+public async show(@Param() param: DataParamUser): Promise<UserRdo> {
+  const dataUser = await this.userActionsService.show(param.idUser);
   return fillDTO(UserRdo, dataUser)
 }
 }

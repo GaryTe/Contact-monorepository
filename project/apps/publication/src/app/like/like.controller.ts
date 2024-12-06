@@ -1,7 +1,8 @@
 import { Controller, Post, Query, Get } from '@nestjs/common';
 
 import {LikeService} from './like.service';
-import {DataQueryLike} from '@project/typs';
+import {DataQueryLike} from './data-query-like';
+import {DataQueryGetLike} from './data-query-get-like';
 import {LikeRdo} from './rdo/like.rdo';
 
 @Controller('/like')
@@ -19,7 +20,7 @@ export class LikeController {
 
   @Get('/')
   public async getLike(
-    @Query() query: DataQueryLike
+    @Query() query: DataQueryGetLike
   ): Promise<LikeRdo> {
     return await this.likeService.getLike(query);
   }

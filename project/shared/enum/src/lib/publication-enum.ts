@@ -23,3 +23,10 @@ export enum Sort {
   Like = 'like',
   Comment = 'comment'
 }
+
+export enum Tag {
+  TagsList = 8,
+  MinTagLength = 3,
+  MaxTagLength = 10,
+  Space = ' '
+}
