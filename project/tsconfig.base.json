@@ -22,7 +22,8 @@
       "@project/prisma-publication.configuration": [
         "shared/prisma-publication.configuration/src/index.ts"
       ],
-      "@project/typs": ["shared/typs/src/index.ts"]
+      "@project/typs": ["shared/typs/src/index.ts"],
+      "@project/validation-errors": ["shared/validation-errors/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

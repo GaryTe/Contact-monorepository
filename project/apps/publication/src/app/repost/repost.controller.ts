@@ -1,7 +1,7 @@
 import { Controller, Post, Query } from '@nestjs/common';
 
 import {RepostService} from './repost.service';
-import {DataQueryRepost} from '@project/typs';
+import {DataQueryRepost} from './data-query-repost';
 import {DetailInformationRdo} from './index';
 import {fillDTO} from '@project/helpers'
 

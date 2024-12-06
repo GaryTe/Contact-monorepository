@@ -19,7 +19,10 @@ export class ListPublicationRepository {
     tag,
     limit,
     page
-  }: DataQueryList): Promise<Publication[] | []> {
+  }: DataQueryList & {
+    limit: number;
+    page: number;
+  }): Promise<Publication[] | []> {
 
     return await this.client.publication.findMany({
       where: {

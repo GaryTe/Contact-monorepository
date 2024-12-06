@@ -4,6 +4,7 @@ import {PhotoRepository} from './photo.repository';
 import {DataPhoto, Publication , DataQueryPhoto} from '@project/typs';
 import {BlogPhotoEntity} from './blog-photo.entity';
 import {UpdatePhotoDto} from './index';
+import {filterTags} from '@project/helpers';
 
 @Injectable()
 export class PhotoService {
@@ -12,7 +13,11 @@ export class PhotoService {
   ) {}
 
   public async create(dto: DataPhoto): Promise<Publication> {
-    const dataPhoto = new BlogPhotoEntity(dto);
+    const tagsList = filterTags(dto.tags);
+    const dataPhoto = new BlogPhotoEntity({
+      ...dto,
+      tags: tagsList
+    });
 
     return await this.photoRepository.create(dataPhoto);
   }
@@ -22,7 +27,11 @@ export class PhotoService {
   }
 
   public async editing(query: DataQueryPhoto, dto: UpdatePhotoDto): Promise<Publication> {
-    return await this.photoRepository.editing(query, dto);
+    const tagsList = filterTags(dto.tags);
+    return await this.photoRepository.editing(
+      query,
+      {...dto, tags: tagsList}
+    );
   }
 
   public async delet(query: DataQueryPhoto): Promise<Publication> {

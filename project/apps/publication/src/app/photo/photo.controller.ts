@@ -1,10 +1,21 @@
-import { Controller, Post, Body, Param, Get, Patch, Query, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Post,
+  Body,
+  Param,
+  Get,
+  Patch,
+  Query,
+  Delete,
+  ParseIntPipe
+} from '@nestjs/common';
 
 import {PhotoService} from './photo.service';
 import { CreatePhotoDto, UpdatePhotoDto } from './index';
 import { PhotoRdo, DetailInformationRdo } from './index';
 import {fillDTO} from '@project/helpers';
-import {DataQueryPhoto} from '@project/typs';
+import {DataQueryPhoto} from './data-query-photo';
+import {DataParamUser} from '../video/data-param-user';
 
 @Controller('/photo')
 export class PhotoController {
@@ -15,14 +26,14 @@ export class PhotoController {
   @Post('/:idUser')
   public async create(
     @Body() dto: CreatePhotoDto,
-    @Param('idUser') idUser: string
+    @Param() param: DataParamUser
   ): Promise<PhotoRdo> {
-    const dataPhoto = await this.photoService.create({...dto, idUser});
+    const dataPhoto = await this.photoService.create({...dto, idUser: param.idUser});
     return fillDTO(PhotoRdo, dataPhoto)
   }
 
   @Get('/:idPhoto')
-  public async show(@Param('idPhoto') idPhoto: string): Promise<DetailInformationRdo> {
+  public async show(@Param('idPhoto', ParseIntPipe) idPhoto: number): Promise<DetailInformationRdo> {
     const dataPhoto = await this.photoService.show(Number(idPhoto));
     return fillDTO(DetailInformationRdo, dataPhoto)
   }

@@ -1,10 +1,21 @@
-import { Controller, Post, Body, Param, Get, Query, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Post,
+  Body,
+  Param,
+  Get,
+  Query,
+  Delete,
+  ParseIntPipe
+} from '@nestjs/common';
 
 import {CreateCommentDto} from './index';
 import {CommentService} from './comment.service';
 import {CommentRdo} from './index';
 import {fillDTO} from '@project/helpers';
-import {DataQueryComment, DetailInformationComment} from '@project/typs';
+import {DetailInformationComment} from '@project/typs';
+import {DataQueryComment} from './data-query-comment';
+import {DataParamUser} from '../video/data-param-user';
 
 @Controller('/comment')
 export class CommentController {
@@ -15,15 +26,15 @@ export class CommentController {
   @Post('/:idUser')
   public async create(
     @Body() dto: CreateCommentDto,
-    @Param('idUser') idUser: string
+    @Param() param: DataParamUser
   ): Promise<DetailInformationComment> {
-    const dataComment = await this.commentService.create(dto, idUser);
+    const dataComment = await this.commentService.create(dto, param.idUser);
     return fillDTO(CommentRdo, dataComment)
   }
 
   @Get('/:idPublication')
-  public async getAllComment(@Param('idPublication') idPublication: string) {
-    const dataCommentsList = await this.commentService.getAllComment(Number(idPublication));
+  public async getAllComment(@Param('idPublication', ParseIntPipe) idPublication: number) {
+    const dataCommentsList = await this.commentService.getAllComment(idPublication);
     return fillDTO(CommentRdo, dataCommentsList)
   }
 

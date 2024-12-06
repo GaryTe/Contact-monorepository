@@ -1,4 +1,4 @@
-import { Logger } from '@nestjs/common';
+import { Logger, ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 
 import { AppModule } from './app/app.module';
@@ -10,6 +10,8 @@ async function bootstrap() {
   const config = new UserConfig()
 
   app.setGlobalPrefix(GLOBAL_PEFIX);
+  app.useGlobalPipes(new ValidationPipe())
+
   const port = config.get('PORT');
 
   await app.listen(port);

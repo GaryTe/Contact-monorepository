@@ -4,6 +4,7 @@ import {VideoRepository} from './video.repository';
 import {DataVideo,Publication , DataQueryVideo} from '@project/typs';
 import {BlogVideoEntity} from './blog-video.entity';
 import {UpdateVideoDto} from './index';
+import {filterTags} from '@project/helpers';
 
 @Injectable()
 export class VideoService {
@@ -12,7 +13,11 @@ export class VideoService {
   ) {}
 
   public async create(dto: DataVideo): Promise<Publication> {
-    const dataVideo = new BlogVideoEntity(dto);
+    const tagsList = filterTags(dto.tags);
+    const dataVideo = new BlogVideoEntity({
+      ...dto,
+      tags: tagsList
+    });
 
     return await this.videoRepository.create(dataVideo);
   }
@@ -22,7 +27,11 @@ export class VideoService {
   }
 
   public async editing(query: DataQueryVideo, dto: UpdateVideoDto): Promise<Publication> {
-    return await this.videoRepository.editing(query, dto);
+    const tagsList = filterTags(dto.tags);
+    return await this.videoRepository.editing(
+      query,
+      {...dto, tags: tagsList}
+    );
   }
 
   public async delet(query: DataQueryVideo): Promise<Publication> {

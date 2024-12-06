@@ -1,10 +1,21 @@
-import { Controller, Post, Body, Param, Get, Patch, Query, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Post,
+  Body,
+  Param,
+  Get,
+  Patch,
+  Query,
+  Delete,
+  ParseIntPipe
+} from '@nestjs/common';
 
 import {QuoteService} from './quote.service';
 import { CreateQuoteDto, UpdateQuoteDto } from './index';
 import { QuoteRdo, DetailInformationRdo } from './index';
 import {fillDTO} from '@project/helpers';
-import {DataQueryQuote} from '@project/typs';
+import {DataQueryQuote} from './data-query-quote';
+import {DataParamUser} from '../video/data-param-user';
 
 @Controller('/quote')
 export class QuoteController {
@@ -15,15 +26,15 @@ export class QuoteController {
   @Post('/:idUser')
   public async create(
     @Body() dto: CreateQuoteDto,
-    @Param('idUser') idUser: string
+    @Param() param: DataParamUser
   ): Promise<QuoteRdo> {
-    const dataQuote = await this.quoteService.create({...dto, idUser});
+    const dataQuote = await this.quoteService.create({...dto, idUser: param.idUser});
     return fillDTO(QuoteRdo, dataQuote)
   }
 
   @Get('/:idQuote')
-  public async show(@Param('idQuote') idQuote: string): Promise<DetailInformationRdo> {
-    const dataQuote = await this.quoteService.show(Number(idQuote));
+  public async show(@Param('idQuote', ParseIntPipe) idQuote: number): Promise<DetailInformationRdo> {
+    const dataQuote = await this.quoteService.show(idQuote);
     return fillDTO(DetailInformationRdo, dataQuote)
   }
 

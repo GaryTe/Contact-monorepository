@@ -1,27 +1,29 @@
 # Создание ссылки
-POST  http://localhost:3000/api/link/1984 HTTP/1.1
+POST  http://localhost:3000/api/link/674ef86bbbe20f079fdb30bd HTTP/1.1
 Content-Type: application/json
 
 {
-  "link": "http://localhost:3000/upload/b01a423d-0ac8-46d7-a50b-f005c4525080.jpg",
-  "description": "Влад привет !!!"
+  "link": "https://www.youtube.com/watch?v=cjNwrE5zHn8&t=2716s",
+  "description": "Мая любимая фотография"
 }
 
 ###
 # Получение детальной информации по ссылке
-GET   http://localhost:3000/api/link/11 HTTP/1.1
+GET   http://localhost:3000/api/link/32 HTTP/1.1
 
 ###
 ## Редактирование ссылки
-PATCH  http://localhost:3000/api/link/?idUser=1984&idLink=11 HTTP/1.1
+PATCH  http://localhost:3000/api/link/?idUser=674ef86bbbe20f079fdb30bd&idLink=33 HTTP/1.1
 Content-Type: application/json
 
 {
   "tags": [
-    "Опубликовано"
+    "link",
+    "Music",
+    "music"
     ]
 }
 
 ###
 ## Удаление ссылки
-DELETE   http://localhost:3000/api/link/?idUser=1984&idLink=11 HTTP/1.1
+DELETE   http://localhost:3000/api/link/?idUser=674ef86bbbe20f079fdb30bd&idLink=32 HTTP/1.1
