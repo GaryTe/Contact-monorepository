@@ -1,2 +1,3 @@
 # Создание видео
-POST  http://localhost:3000/api/repost/?idUser=674ef86bbbe20f079fdb30bd&idPublication=31 HTTP/1.1
+POST  http://localhost:2000/api/repost/?idPublication=31 HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NGYxOGRhYzA5YjM5ZDRkYTdmODlkNSIsImVtYWlsIjoiVmxhZEBtYWlsLmNvbSIsIm5hbWUiOiJWbGFkIFNhem9ub3YiLCJpYXQiOjE3MzQwNzQ5NjcsImV4cCI6MTczNDA3NTA4N30.WCaOmFKcqX1Z2PNg0du0PEiHbkGeWiYtESeYUpy4Ln0

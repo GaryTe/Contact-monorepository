@@ -24,3 +24,15 @@ export type DataUser = {
   passwordHash?: string;
 }
 
+export type AccessAndRefreshToken = {
+  accessToken: string;
+  refreshToken: string;
+}
+
+export type TokenPayload = {
+  email: string;
+  name: string;
+  id: string;
+  refreshToken?: string;
+  expiration?: string;
+};

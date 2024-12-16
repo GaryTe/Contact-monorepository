@@ -7,15 +7,18 @@ import {
   Patch,
   Query,
   Delete,
-  ParseIntPipe
+  ParseIntPipe,
+  UseGuards,
+  Req
  } from '@nestjs/common';
+ import {Request} from 'express';
 
 import {VideoService} from './video.service';
 import {CreateVideoDto, UpdateVideoDto} from './index';
 import {VideoRdo, DetailInformationRdo} from './index';
 import {fillDTO} from '@project/helpers';
 import {DataQueryVideo} from './data-query-video';
-import {DataParamUser} from './data-param-user';
+import {AuthenticationGuard} from '@project/config-user';
 
 @Controller('/video')
 export class VideoController {
@@ -23,12 +26,14 @@ export class VideoController {
     private readonly videoService: VideoService
   ) {}
 
-  @Post('/:idUser')
+  @UseGuards(AuthenticationGuard)
+  @Post('/')
   public async create(
+    @Req() req: Request,
     @Body() dto: CreateVideoDto,
-    @Param() param: DataParamUser
   ): Promise<VideoRdo> {
-    const dataVideo = await this.videoService.create({...dto, idUser: param.idUser});
+    const [id] = req.headers?.tokenPayload as unknown as string
+    const dataVideo = await this.videoService.create({...dto, idUser: id});
     return fillDTO(VideoRdo, dataVideo)
   }
 
@@ -38,15 +43,24 @@ export class VideoController {
     return fillDTO(DetailInformationRdo, dataVideo)
   }
 
+  @UseGuards(AuthenticationGuard)
   @Patch('/')
-  public async editing(@Body() dto: UpdateVideoDto, @Query() query: DataQueryVideo): Promise<VideoRdo> {
-    const dataVideo = await this.videoService.editing(query, dto);
+  public async editing(
+    @Req() req: Request,
+    @Body() dto: UpdateVideoDto,
+    @Query() query: DataQueryVideo): Promise<VideoRdo> {
+    const [id] = req.headers?.tokenPayload as unknown as string
+    const dataVideo = await this.videoService.editing({...query, idUser: id}, dto);
     return fillDTO(VideoRdo, dataVideo)
   }
 
+  @UseGuards(AuthenticationGuard)
   @Delete('/')
-  public async delet(@Query() query: DataQueryVideo): Promise<VideoRdo> {
-    const dataVideo = await this.videoService.delet(query);
+  public async delet(
+    @Req() req: Request,
+    @Query() query: DataQueryVideo): Promise<VideoRdo> {
+    const [id] = req.headers?.tokenPayload as unknown as string
+    const dataVideo = await this.videoService.delet({...query, idUser: id});
     return fillDTO(VideoRdo, dataVideo)
   }
 }

@@ -10,6 +10,12 @@ export type ConfigSchema = {
   MONGO_PASSWORD: string;
   MONGO_DB: string;
   MONGO_HOST: string;
+  JWT_ACCESS_SECRET: string;
+  JWT_REFRESH_SECRET: string;
+  JWT_ALGORITHM: string;
+  TYP: string;
+  JWT_ACCESS_EXPIRED: string
+  JWT_REFRESH_EXPIRED: string
 }
 
 export const configSchemaUser = convict<ConfigSchema>({
@@ -47,6 +53,42 @@ export const configSchemaUser = convict<ConfigSchema>({
     doc: 'IP address of the database server (MongoDB)',
     format: 'ipaddress',
     env: 'MONGO_HOST',
+    default: null
+  },
+  JWT_ACCESS_SECRET: {
+    doc: 'Secret for sccessToken',
+    format: String,
+    env: 'JWT_ACCESS_SECRET',
+    default: null
+  },
+  JWT_REFRESH_SECRET: {
+    doc: 'Secret for refreshToken',
+    format: String,
+    env: 'JWT_REFRESH_SECRET',
+    default: null
+  },
+  JWT_ALGORITHM: {
+    doc: 'Encryption algorithm for token',
+    format: String,
+    env: 'JWT_ALGORITHM',
+    default: null
+  },
+  TYP: {
+    doc: 'Typ for token',
+    format: String,
+    env: 'TYP',
+    default: null
+  },
+  JWT_ACCESS_EXPIRED: {
+    doc: 'Expiration time for sccessToken',
+    format: String,
+    env: 'JWT_ACCESS_EXPIRED',
+    default: null
+  },
+  JWT_REFRESH_EXPIRED: {
+    doc: 'Expiration time for refreshToken',
+    format: String,
+    env: 'JWT_REFRESH_EXPIRED',
     default: null
   }
 });

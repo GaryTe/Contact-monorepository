@@ -4,5 +4,6 @@ export * from './dto/authorization-user.dto';
 export * from './interfaces.ts/user-controller.interface';
 export * from './interfaces.ts/user-service.interface';
 export * from './interfaces.ts/user-repository.interface';
+export * from './interfaces.ts/user-authentication.interface';
 export * from './data-param-user';
 export * from './data-query-user';

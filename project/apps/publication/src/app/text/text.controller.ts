@@ -7,15 +7,18 @@ import {
   Patch,
   Query,
   Delete,
-  ParseIntPipe
+  ParseIntPipe,
+  UseGuards,
+  Req
  } from '@nestjs/common';
+ import {Request} from 'express';
 
 import {TextService} from './text.service';
 import { CreateTextDto, UpdateTextDto } from './index';
 import { TextRdo, DetailInformationRdo } from './index';
 import {fillDTO} from '@project/helpers';
 import {DataQueryText} from './data-query-text';
-import {DataParamUser} from '../video/data-param-user';
+import {AuthenticationGuard} from '@project/config-user';
 
 @Controller('/text')
 export class TextController {
@@ -23,12 +26,14 @@ export class TextController {
     private readonly textService: TextService
   ) {}
 
-  @Post('/:idUser')
+  @UseGuards(AuthenticationGuard)
+  @Post('/')
   public async create(
-    @Body() dto: CreateTextDto,
-    @Param() param: DataParamUser
+    @Req() req: Request,
+    @Body() dto: CreateTextDto
   ): Promise<TextRdo> {
-    const dataText = await this.textService.create({...dto, idUser: param.idUser});
+    const [id] = req.headers?.tokenPayload as unknown as string
+    const dataText = await this.textService.create({...dto, idUser: id});
     return fillDTO(TextRdo, dataText)
   }
 
@@ -38,15 +43,24 @@ export class TextController {
     return fillDTO(DetailInformationRdo, dataText)
   }
 
+  @UseGuards(AuthenticationGuard)
   @Patch('/')
-  public async editing(@Body() dto: UpdateTextDto, @Query() query: DataQueryText): Promise<TextRdo> {
-    const dataText = await this.textService.editing(query, dto);
+  public async editing(
+    @Req() req: Request,
+    @Body() dto: UpdateTextDto,
+    @Query() query: DataQueryText): Promise<TextRdo> {
+    const [id] = req.headers?.tokenPayload as unknown as string
+    const dataText = await this.textService.editing({...query, idUser: id}, dto);
     return fillDTO(TextRdo, dataText)
   }
 
+  @UseGuards(AuthenticationGuard)
   @Delete('/')
-  public async delet(@Query() query: DataQueryText): Promise<TextRdo> {
-    const dataText = await this.textService.delet(query);
+  public async delet(
+    @Req() req: Request,
+    @Query() query: DataQueryText): Promise<TextRdo> {
+    const [id] = req.headers?.tokenPayload as unknown as string
+    const dataText = await this.textService.delet({...query, idUser: id});
     return fillDTO(TextRdo, dataText)
   }
 }

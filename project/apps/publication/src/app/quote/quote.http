@@ -1,11 +1,11 @@
 # Создание цитаты
-POST  http://localhost:3000/api/quote/674ef86bbbe20f079fdb30bd HTTP/1.1
+POST  http://localhost:2000/api/quote/ HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NGYxOGRhYzA5YjM5ZDRkYTdmODlkNSIsImVtYWlsIjoiVmxhZEBtYWlsLmNvbSIsIm5hbWUiOiJWbGFkIFNhem9ub3YiLCJpYXQiOjE3MzQwNzY1NDIsImV4cCI6MTczNDA3NjY2Mn0.-bCLwWSApTbj-ajWScH1RqW7yAO_3yxG5UAk0HsMsr4
 Content-Type: application/json
 
 {
   "text": "Кто, имея знания, делает вид, что не знает, тот выше всех.",
-  "name": "Vlad",
-  "state": "Опубликовано"
+  "name": "Igor"
 }
 
 ###
@@ -14,15 +14,18 @@ GET   http://localhost:3000/api/quote/15 HTTP/1.1
 
 ###
 ## Редактирование цитаты
-PATCH  http://localhost:3000/api/quote/?idUser=674ef86bbbe20f079fdb30bd&idQuote=16 HTTP/1.1
+PATCH  http://localhost:2000/api/quote/?idQuote=39 HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NGYxOGRhYzA5YjM5ZDRkYTdmODlkNSIsImVtYWlsIjoiVmxhZEBtYWlsLmNvbSIsIm5hbWUiOiJWbGFkIFNhem9ub3YiLCJpYXQiOjE3MzQwNzY2NzcsImV4cCI6MTczNDA3Njc5N30.t_5PsLQOq02RgEWm9WUTZRHttnGDziphxPrzSJGQGBw
 Content-Type: application/json
 
 {
   "tags": [
-    "Quote"
+    "Quote",
+    "Igor"
     ]
 }
 
 ###
 ## Удаление цитаты
-DELETE   http://localhost:3000/api/quote/?idUser=674ef86bbbe20f079fdb30bd&idQuote=15 HTTP/1.1
+DELETE   http://localhost:2000/api/quote/?idQuote=39 HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NGYxOGRhYzA5YjM5ZDRkYTdmODlkNSIsImVtYWlsIjoiVmxhZEBtYWlsLmNvbSIsIm5hbWUiOiJWbGFkIFNhem9ub3YiLCJpYXQiOjE3MzQwNzY2NzcsImV4cCI6MTczNDA3Njc5N30.t_5PsLQOq02RgEWm9WUTZRHttnGDziphxPrzSJGQGBw

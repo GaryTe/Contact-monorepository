@@ -12,7 +12,7 @@ export class FindPublicationController {
   ) {}
 
   @Get('/:word')
-  public async likeDislike(@Param() param: DataParamPublication): Promise<DetailInformationRdo> {
+  public async findPublication(@Param() param: DataParamPublication): Promise<DetailInformationRdo> {
     const dataPublication = await this.findPublicationService.findPublication(param.word);
 
     return fillDTO(DetailInformationRdo, dataPublication)

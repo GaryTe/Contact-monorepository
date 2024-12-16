@@ -7,15 +7,18 @@ import {
   Patch,
   Query,
   Delete,
-  ParseIntPipe
+  ParseIntPipe,
+  Req,
+  UseGuards
 } from '@nestjs/common';
+import {Request} from 'express';
 
 import {QuoteService} from './quote.service';
 import { CreateQuoteDto, UpdateQuoteDto } from './index';
 import { QuoteRdo, DetailInformationRdo } from './index';
 import {fillDTO} from '@project/helpers';
 import {DataQueryQuote} from './data-query-quote';
-import {DataParamUser} from '../video/data-param-user';
+import {AuthenticationGuard} from '@project/config-user';
 
 @Controller('/quote')
 export class QuoteController {
@@ -23,12 +26,14 @@ export class QuoteController {
     private readonly quoteService: QuoteService
   ) {}
 
-  @Post('/:idUser')
+  @UseGuards(AuthenticationGuard)
+  @Post('/')
   public async create(
-    @Body() dto: CreateQuoteDto,
-    @Param() param: DataParamUser
+    @Req() req: Request,
+    @Body() dto: CreateQuoteDto
   ): Promise<QuoteRdo> {
-    const dataQuote = await this.quoteService.create({...dto, idUser: param.idUser});
+    const [id] = req.headers?.tokenPayload as unknown as string
+    const dataQuote = await this.quoteService.create({...dto, idUser: id});
     return fillDTO(QuoteRdo, dataQuote)
   }
 
@@ -38,15 +43,24 @@ export class QuoteController {
     return fillDTO(DetailInformationRdo, dataQuote)
   }
 
+  @UseGuards(AuthenticationGuard)
   @Patch('/')
-  public async editing(@Body() dto: UpdateQuoteDto, @Query() query: DataQueryQuote): Promise<QuoteRdo> {
-    const dataQuote = await this.quoteService.editing(query, dto);
+  public async editing(
+    @Req() req: Request,
+    @Body() dto: UpdateQuoteDto,
+    @Query() query: DataQueryQuote): Promise<QuoteRdo> {
+    const [id] = req.headers?.tokenPayload as unknown as string
+    const dataQuote = await this.quoteService.editing({...query, idUser: id}, dto);
     return fillDTO(QuoteRdo, dataQuote)
   }
 
+  @UseGuards(AuthenticationGuard)
   @Delete('/')
-  public async delet(@Query() query: DataQueryQuote): Promise<QuoteRdo> {
-    const dataQuote = await this.quoteService.delet(query);
+  public async delet(
+    @Req() req: Request,
+    @Query() query: DataQueryQuote): Promise<QuoteRdo> {
+    const [id] = req.headers?.tokenPayload as unknown as string
+    const dataQuote = await this.quoteService.delet({...query, idUser: id});
     return fillDTO(QuoteRdo, dataQuote)
   }
 }

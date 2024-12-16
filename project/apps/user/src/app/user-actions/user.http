@@ -3,10 +3,10 @@ POST http://localhost:3000/api/user/avatar HTTP/1.1
 Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
 
 ------WebKitFormBoundary7MA4YWxkTrZu0g
-Content-Disposition: form-data; name="avatar"; filename="avatar.jpg"
+Content-Disposition: form-data; name="avatar"; filename="rock-adding.png"
 Content-Type: image/png
 
-< C:\Users\User\Desktop\readme\project\apps\user\static\avatar.jpg
+< C:/Users/User/Desktop/readme/project/apps/user/static/rock-adding.png
 ------WebKitFormBoundary7MA4YWxkTrZu0gW--
 
 ###
@@ -21,19 +21,25 @@ Content-Type: application/json
 }
 
 ###
-# User authentication and authorization
+# User authorization
 GET   http://localhost:3000/api/user/authentication HTTP/1.1
 Content-Type: application/json
 
 {
   "email": "Vlad@mail.com",
-  "password": "1984Vlad"
+  "password": "Volga_2025"
 }
 
 ###
 ## Сменить пароль пользователя
-PATCH  http://localhost:3000/api/user/change/674ef86bbbe20f079fdb30bd?oldPassword=4891SP&newPassword=489187 HTTP/1.1
+PATCH  http://localhost:3000/api/user/change?oldPassword=Volga_2025&newPassword=Vlad.V_1984 HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NGYxOGRhYzA5YjM5ZDRkYTdmODlkNSIsImVtYWlsIjoiVmxhZEBtYWlsLmNvbSIsIm5hbWUiOiJWbGFkIFNhem9ub3YiLCJpYXQiOjE3MzQyNjM4MTYsImV4cCI6MTczNDI2MzkzNn0.iVV6QZiV3isWLX87IGxpr54uB5e1sJ6oFllHtRv8STg
 
 ###
 ## Запросить детальную информацию по определенному пользователю
 GET http://localhost:3000/api/user/674ef86bbbe20f079fdb30bd HTTP/1.1
+
+###
+## Получение новой пары  accessToken и refreshToken
+POST  http://localhost:3000/api/user/tokens HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NGYxOGRhYzA5YjM5ZDRkYTdmODlkNSIsImVtYWlsIjoiVmxhZCBTYXpvbm92IiwibmFtZSI6IlZsYWRAbWFpbC5jb20iLCJpYXQiOjE3MzQyNjM2MTEsImV4cCI6MTczNDM1MDAxMX0.JpGhEoJ5mhB9KMkP9PCt9CYsP47zmHCxm3S1BTUtcXA

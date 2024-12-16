@@ -1,17 +1,12 @@
 # Создание видео
-POST  http://localhost:3000/api/video/674ef86bbbe20f079fdb30bd HTTP/1.1
+POST  http://localhost:2000/api/video/ HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NGYxOGRhYzA5YjM5ZDRkYTdmODlkNSIsImVtYWlsIjoiVmxhZEBtYWlsLmNvbSIsIm5hbWUiOiJWbGFkIFNhem9ub3YiLCJpYXQiOjE3MzQwMDk4NTMsImV4cCI6MTczNDAwOTk3M30.mTC4AxCWuZhg3oxsfJhKdq5aZckC3_ChVY-XWQmgyfk
 Content-Type: application/json
 
 {
-  "name": "Это ссылка на видео, привлекло мое внимание.",
-  "link": "https://www.youtube.com/watch?v=UeAWbDEMj7E",
-  "tags": [
-    "Vlad",
-    "lex",
-    "Vlad",
-    "Sveta"
-  ],
-  "state": "Опубликовано"
+  "name": "Это ссылка на видео с толантлевой девушкой.",
+  "link": "https://www.youtube.com/watch?v=_MmOZKh0sSc",
+  "state": "Черновик"
 }
 
 ###
@@ -20,15 +15,18 @@ GET   http://localhost:3000/api/video/25 HTTP/1.1
 
 ###
 ## Редактирование видео
-PATCH  http://localhost:3000/api/video/?idUser=674ef86bbbe20f079fdb30bd&idVideo=12 HTTP/1.1
+PATCH  http://localhost:2000/api/video/?idVideo=35 HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NGYxOGRhYzA5YjM5ZDRkYTdmODlkNSIsImVtYWlsIjoiVmxhZEBtYWlsLmNvbSIsIm5hbWUiOiJWbGFkIFNhem9ub3YiLCJpYXQiOjE3MzQwMTA2NDQsImV4cCI6MTczNDAxMDc2NH0.K5ipzT5Zv4Cj5xxZazUNuGD6n1SDyn7MaDlFfjfe2jo
 Content-Type: application/json
 
 {
   "tags": [
     "Vlad"
-  ]
+  ],
+  "state": "Опубликовано"
 }
 
 ###
 ## Удаление видео
-DELETE   http://localhost:3000/api/video/?idUser=674ef86bbbe20f079fdb30bd&idVideo=25 HTTP/1.1
+DELETE   http://localhost:2000/api/video/?idVideo=37 HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NGYxOGRhYzA5YjM5ZDRkYTdmODlkNSIsImVtYWlsIjoiVmxhZEBtYWlsLmNvbSIsIm5hbWUiOiJWbGFkIFNhem9ub3YiLCJpYXQiOjE3MzQwNzQ5MDEsImV4cCI6MTczNDA3NTAyMX0.jA6J2NVaE5Qtg_Zc5q6oTwVhmT8qENPituR9UVnSe9E

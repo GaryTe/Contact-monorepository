@@ -1,5 +1,6 @@
 # Создание ссылки
-POST  http://localhost:3000/api/link/674ef86bbbe20f079fdb30bd HTTP/1.1
+POST  http://localhost:2000/api/link/ HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NGYxOGRhYzA5YjM5ZDRkYTdmODlkNSIsImVtYWlsIjoiVmxhZEBtYWlsLmNvbSIsIm5hbWUiOiJWbGFkIFNhem9ub3YiLCJpYXQiOjE3MzQwODI3NjksImV4cCI6MTczNDA4Mjg4OX0.4jWoyuVkt65nMjiaUkcwSjVFHxHg0YXk07VwnTlQ7jg
 Content-Type: application/json
 
 {
@@ -13,7 +14,8 @@ GET   http://localhost:3000/api/link/32 HTTP/1.1
 
 ###
 ## Редактирование ссылки
-PATCH  http://localhost:3000/api/link/?idUser=674ef86bbbe20f079fdb30bd&idLink=33 HTTP/1.1
+PATCH  http://localhost:2000/api/link/?idLink=41 HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NGYxOGRhYzA5YjM5ZDRkYTdmODlkNSIsImVtYWlsIjoiVmxhZEBtYWlsLmNvbSIsIm5hbWUiOiJWbGFkIFNhem9ub3YiLCJpYXQiOjE3MzQwODI3NjksImV4cCI6MTczNDA4Mjg4OX0.4jWoyuVkt65nMjiaUkcwSjVFHxHg0YXk07VwnTlQ7jg
 Content-Type: application/json
 
 {
@@ -26,4 +28,5 @@ Content-Type: application/json
 
 ###
 ## Удаление ссылки
-DELETE   http://localhost:3000/api/link/?idUser=674ef86bbbe20f079fdb30bd&idLink=32 HTTP/1.1
+DELETE   http://localhost:2000/api/link/?idLink=32 HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NGYxOGRhYzA5YjM5ZDRkYTdmODlkNSIsImVtYWlsIjoiVmxhZEBtYWlsLmNvbSIsIm5hbWUiOiJWbGFkIFNhem9ub3YiLCJpYXQiOjE3MzQwODI3NjksImV4cCI6MTczNDA4Mjg4OX0.4jWoyuVkt65nMjiaUkcwSjVFHxHg0YXk07VwnTlQ7jg
