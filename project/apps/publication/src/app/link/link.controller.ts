@@ -7,15 +7,18 @@ import {
   Patch,
   Query,
   Delete,
-  ParseIntPipe
+  ParseIntPipe,
+  Req,
+  UseGuards
 } from '@nestjs/common';
+import {Request} from 'express';
 
 import {LinkService} from './link.service';
 import { CreateLinkDto, UpdateLinkDto } from './index';
 import { LinkRdo, DetailInformationRdo } from './index';
 import {fillDTO} from '@project/helpers';
 import {DataQueryLink} from './data-query-link';
-import {DataParamUser} from '../video/data-param-user';
+import {AuthenticationGuard} from '@project/config-user';
 
 @Controller('/link')
 export class LinkController {
@@ -23,12 +26,14 @@ export class LinkController {
     private readonly linkService: LinkService
   ) {}
 
-  @Post('/:idUser')
+  @UseGuards(AuthenticationGuard)
+  @Post('/')
   public async create(
-    @Body() dto: CreateLinkDto,
-    @Param() param: DataParamUser
+    @Req() req: Request,
+    @Body() dto: CreateLinkDto
   ): Promise<LinkRdo> {
-    const dataLink = await this.linkService.create({...dto, idUser: param.idUser});
+    const [id] = req.headers?.tokenPayload as unknown as string
+    const dataLink = await this.linkService.create({...dto, idUser: id});
     return fillDTO(LinkRdo, dataLink)
   }
 
@@ -38,15 +43,24 @@ export class LinkController {
     return fillDTO(DetailInformationRdo, dataLink)
   }
 
+  @UseGuards(AuthenticationGuard)
   @Patch('/')
-  public async editing(@Body() dto: UpdateLinkDto, @Query() query: DataQueryLink): Promise<LinkRdo> {
-    const dataLink = await this.linkService.editing(query, dto);
+  public async editing(
+    @Req() req: Request,
+    @Body() dto: UpdateLinkDto,
+    @Query() query: DataQueryLink): Promise<LinkRdo> {
+    const [id] = req.headers?.tokenPayload as unknown as string
+    const dataLink = await this.linkService.editing({...query, idUser: id}, dto);
     return fillDTO(LinkRdo, dataLink)
   }
 
+  @UseGuards(AuthenticationGuard)
   @Delete('/')
-  public async delet(@Query() query: DataQueryLink): Promise<LinkRdo> {
-    const dataLink = await this.linkService.delet(query);
+  public async delet(
+    @Req() req: Request,
+    @Query() query: DataQueryLink): Promise<LinkRdo> {
+    const [id] = req.headers?.tokenPayload as unknown as string
+    const dataLink = await this.linkService.delet({...query, idUser: id});
     return fillDTO(LinkRdo, dataLink)
   }
 }

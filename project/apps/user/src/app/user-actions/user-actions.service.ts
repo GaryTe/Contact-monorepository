@@ -1,14 +1,20 @@
 import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
 
 import {BlogUserRepository} from '../blog-user/blog-user.repository';
-import {CreateUserDto, AuthorizationUserDto, UserServiceInterface} from './index';
-import {DataQueryUser, DataParamUser} from '@project/typs';
+import {CreateUserDto, UserServiceInterface} from './index';
+import {DataQueryUser, AccessAndRefreshToken} from '@project/typs';
 import {BlogUserModel, BlogUserEntity} from '../blog-user/index';
+import {BlogRefreshTokenRepository} from '../blog-refresh-token/blog-refresh-token.repository';
+import {AuthenticationUser} from './authentication-user';
+import {UserConfig} from '@project/config-user'
 
 @Injectable()
 export class UserActionsService implements UserServiceInterface {
   constructor(
-    private readonly blogUserRepository: BlogUserRepository
+    private readonly blogUserRepository: BlogUserRepository,
+    private readonly  blogRefreshTokenRepository: BlogRefreshTokenRepository,
+    private readonly authenticationUser: AuthenticationUser,
+    private readonly userConfig: UserConfig
   ) {}
 
   public async create(dto: CreateUserDto): Promise<BlogUserModel> {
@@ -17,44 +23,24 @@ export class UserActionsService implements UserServiceInterface {
     return await this.blogUserRepository.findOrCreate(dataUser);
   }
 
-  public async authentication(dto: AuthorizationUserDto): Promise<{token: string}> {
-    const dataUser = await this.blogUserRepository.findByEmail(dto.email);
-
-    if(!dataUser) {
-      throw new HttpException(
-       `A user with this email: ${dto.email} not found`,
-        HttpStatus.UNAUTHORIZED,
-        {
-          cause: {
-            where: 'blog-actions.service.ts',
-            line: '21'
-          }
-        }
-      );
-    }
-
-    const blogUserEntity = new BlogUserEntity(dataUser)
-    if(!(blogUserEntity.comparePassword(dto.password))) {
-      throw new HttpException(
-       'Incorrect user password',
-        HttpStatus.UNAUTHORIZED,
-        {
-          cause: {
-            where: 'blog-actions.service.ts',
-            line: '34'
-          }
-        }
-      );
-    }
-
-    return {token: '1234'}
+  public async authentication(dataUser: BlogUserModel, dataTokens: AccessAndRefreshToken): Promise<void> {
+    await this.blogRefreshTokenRepository.delete(dataUser.id);
+    await this.blogRefreshTokenRepository.create(
+      {
+        id: dataUser.id,
+        refreshToken: dataTokens.refreshToken,
+        expiration: this.userConfig.get('JWT_REFRESH_EXPIRED'),
+        email: '',
+        name: ''
+      }
+    )
   }
 
   public async change(
     query: DataQueryUser,
-    param: DataParamUser
+    idUser: string
   ): Promise<void> {
-    const dataUser = await this.blogUserRepository.findByid(param.idUser);
+    const dataUser = await this.blogUserRepository.findByid(idUser);
 
     const blogUserEntity = new BlogUserEntity(dataUser)
     if(!(blogUserEntity.comparePassword(query.oldPassword))) {
@@ -72,7 +58,7 @@ export class UserActionsService implements UserServiceInterface {
 
     const passwordHash = blogUserEntity.setPassword(query.newPassword);
 
-    await this.blogUserRepository.findByIdAndUpdate(param.idUser, passwordHash)
+    await this.blogUserRepository.findByIdAndUpdate(idUser, passwordHash)
     throw new HttpException(
       'Password changed',
        HttpStatus.OK,
@@ -81,5 +67,23 @@ export class UserActionsService implements UserServiceInterface {
 
   public async show(id: string): Promise<BlogUserModel> {
     return await this.blogUserRepository.findByid(id);
+  }
+
+  public async createTokens(datasList: string[]): Promise<AccessAndRefreshToken> {
+    const [id,  email, name] = datasList;
+
+    await this.blogRefreshTokenRepository.delete(id);
+    const parAccessTokenAndRefreshToken = await this.authenticationUser.authenticate({id, email, name});
+    await this.blogRefreshTokenRepository.create(
+      {
+        id,
+        refreshToken: parAccessTokenAndRefreshToken.refreshToken,
+        expiration: this.userConfig.get('JWT_REFRESH_EXPIRED'),
+        email: '',
+        name: ''
+      }
+    )
+
+    return parAccessTokenAndRefreshToken
   }
 }

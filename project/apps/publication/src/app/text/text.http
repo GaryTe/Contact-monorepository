@@ -1,20 +1,22 @@
 # Создание текст
-POST  http://localhost:3000/api/text/674ef86bbbe20f079fdb30bd HTTP/1.1
+POST  http://localhost:2000/api/text/ HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NGYxOGRhYzA5YjM5ZDRkYTdmODlkNSIsImVtYWlsIjoiVmxhZEBtYWlsLmNvbSIsIm5hbWUiOiJWbGFkIFNhem9ub3YiLCJpYXQiOjE3MzQwNzM3NDksImV4cCI6MTczNDA3Mzg2OX0.X5s4suo5OCpF4yOYCh9cNGLhv39ckOJXo97yccANPHg
 Content-Type: application/json
 
 {
-  "name": "В отпуске. Поездка в горы по туру выходного дня.",
-  "preview": "Как поездка в горы Домбая, обошлась не дорого но получил уйму впечетлений.",
-  "text": "В четверг с группой выехали поздно вечером. Поездка до Домбая была веселой, уймо знакомств и общения."
+  "name": "В Дубаи. Поездка на две нидели.",
+  "preview": "Как поездка в Дубай, обошлась не дорого но получил уйму впечетлений.",
+  "text": "В четверг с группой вылители сомалетом вечером. Полет до Дубай был спокойный, уймо знакомств и общения."
 }
 
 ###
 # Получение детальной информации по тексту
-GET   http://localhost:3000/api/text/13 HTTP/1.1
+GET   http://localhost:2000/api/text/36 HTTP/1.1
 
 ###
 ## Редактирование текст
-PATCH  http://localhost:3000/api/text/?idUser=674ef86bbbe20f079fdb30bd&idText=13 HTTP/1.1
+PATCH  http://localhost:2000/api/text/?idText=36 HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NGYxOGRhYzA5YjM5ZDRkYTdmODlkNSIsImVtYWlsIjoiVmxhZEBtYWlsLmNvbSIsIm5hbWUiOiJWbGFkIFNhem9ub3YiLCJpYXQiOjE3MzQwNzM4NDUsImV4cCI6MTczNDA3Mzk2NX0.h-bzfBdvAvdfo_gaOfGeLilouQA9gI4O2zIqY5gV3-U
 Content-Type: application/json
 
 {
@@ -23,4 +25,5 @@ Content-Type: application/json
 
 ###
 ## Удаление текста
-DELETE   http://localhost:3000/api/text/?idUser=674ef86bbbe20f079fdb30bd&idText=13 HTTP/1.1
+DELETE   http://localhost:2000/api/text/?idText=36 HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NGYxOGRhYzA5YjM5ZDRkYTdmODlkNSIsImVtYWlsIjoiVmxhZEBtYWlsLmNvbSIsIm5hbWUiOiJWbGFkIFNhem9ub3YiLCJpYXQiOjE3MzQwNzM4NDUsImV4cCI6MTczNDA3Mzk2NX0.h-bzfBdvAvdfo_gaOfGeLilouQA9gI4O2zIqY5gV3-U

@@ -59,6 +59,7 @@ export class RepostRepository {
               link: dataPublication.additional.link,
               tags: dataPublication.additional.tags,
               state: dataPublication.additional.state,
+              type: dataPublication.additional.type,
               repost: State.Repost,
               originalIdUser: dataPublication.additional.idUser,
               originalIdPublication: dataPublication.id.toString()

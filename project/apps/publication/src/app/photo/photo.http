@@ -1,29 +1,29 @@
 # Создание фото
-POST  http://localhost:3000/api/photo/674ef86bbbe20f079fdb30bd HTTP/1.1
+POST  http://localhost:2000/api/photo/ HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NGYxOGRhYzA5YjM5ZDRkYTdmODlkNSIsImVtYWlsIjoiVmxhZEBtYWlsLmNvbSIsIm5hbWUiOiJWbGFkIFNhem9ub3YiLCJpYXQiOjE3MzQwNzc1MDYsImV4cCI6MTczNDA3NzYyNn0.bK1KwD-L4kOGiY08gjALBOgAfkAi8QS0AUKedewTxAA
 Content-Type: application/json
 
 {
-  "photo": "http://localhost:3000/upload/b01a423d-0ac8-46d7-a50b-f005c4525080.jpg",
-  "state": "Опубликовано"
+  "photo": "http://localhost:3000/upload/b01a423d-0ac8-46d7-a50b-f005c4525080.jpg"
 }
 
 ###
 # Получение детальной информации по фото
-GET   http://localhost:3000/api/photo/21 HTTP/1.1
+GET   http://localhost:2000/api/photo/21 HTTP/1.1
 
 ###
 ## Редактирование фото
-PATCH  http://localhost:3000/api/photo/?idUser=674ef86bbbe20f079fdb30bd&idPhoto=31 HTTP/1.1
+PATCH  http://localhost:2000/api/photo/?idPhoto=40 HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NGYxOGRhYzA5YjM5ZDRkYTdmODlkNSIsImVtYWlsIjoiVmxhZEBtYWlsLmNvbSIsIm5hbWUiOiJWbGFkIFNhem9ub3YiLCJpYXQiOjE3MzQwNzc1MDYsImV4cCI6MTczNDA3NzYyNn0.bK1KwD-L4kOGiY08gjALBOgAfkAi8QS0AUKedewTxAA
 Content-Type: application/json
 
 {
   "tags": [
-    "Photo",
-    "Alex",
     "Photo"
     ]
 }
 
 ###
 ## Удаление фото
-DELETE   http://localhost:3000/api/photo/?idUser=674ef86bbbe20f079fdb30bd&idPhoto=21 HTTP/1.1
+DELETE   http://localhost:2000/api/photo/?idPhoto=40 HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NGYxOGRhYzA5YjM5ZDRkYTdmODlkNSIsImVtYWlsIjoiVmxhZEBtYWlsLmNvbSIsIm5hbWUiOiJWbGFkIFNhem9ub3YiLCJpYXQiOjE3MzQwNzc1MDYsImV4cCI6MTczNDA3NzYyNn0.bK1KwD-L4kOGiY08gjALBOgAfkAi8QS0AUKedewTxAA

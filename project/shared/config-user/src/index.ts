@@ -3,3 +3,7 @@ export * from './lib/config/config-user.interface';
 export * from './lib/config/config-user';
 export * from './lib/config/config-schema-user';
 export * from './lib/mongodb/get-mongoose-options';
+export * from './lib/config/authentication.guard';
+export * from './lib/libs/parse-access-token';
+export * from './lib/libs/parse-refresh-token';
+export * from './lib/config/authorization.guard';

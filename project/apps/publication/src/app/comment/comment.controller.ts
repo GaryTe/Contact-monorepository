@@ -6,8 +6,11 @@ import {
   Get,
   Query,
   Delete,
-  ParseIntPipe
+  ParseIntPipe,
+  Req,
+  UseGuards
 } from '@nestjs/common';
+import {Request} from 'express';
 
 import {CreateCommentDto} from './index';
 import {CommentService} from './comment.service';
@@ -15,7 +18,7 @@ import {CommentRdo} from './index';
 import {fillDTO} from '@project/helpers';
 import {DetailInformationComment} from '@project/typs';
 import {DataQueryComment} from './data-query-comment';
-import {DataParamUser} from '../video/data-param-user';
+import {AuthenticationGuard} from '@project/config-user';
 
 @Controller('/comment')
 export class CommentController {
@@ -23,12 +26,14 @@ export class CommentController {
     private readonly commentService: CommentService
   ) {}
 
-  @Post('/:idUser')
+  @UseGuards(AuthenticationGuard)
+  @Post('/')
   public async create(
-    @Body() dto: CreateCommentDto,
-    @Param() param: DataParamUser
+    @Req() req: Request,
+    @Body() dto: CreateCommentDto
   ): Promise<DetailInformationComment> {
-    const dataComment = await this.commentService.create(dto, param.idUser);
+    const [id] = req.headers?.tokenPayload as unknown as string
+    const dataComment = await this.commentService.create(dto, id);
     return fillDTO(CommentRdo, dataComment)
   }
 
@@ -38,9 +43,13 @@ export class CommentController {
     return fillDTO(CommentRdo, dataCommentsList)
   }
 
+  @UseGuards(AuthenticationGuard)
   @Delete('/')
-  public async delet(@Query() query: DataQueryComment): Promise<DetailInformationComment> {
-    const dataComment = await this.commentService.delet(query);
+  public async delet(
+    @Req() req: Request,
+    @Query() query: DataQueryComment): Promise<DetailInformationComment> {
+    const [id] = req.headers?.tokenPayload as unknown as string
+    const dataComment = await this.commentService.delet({...query, idUser: id});
     return fillDTO(CommentRdo, dataComment)
   }
 }

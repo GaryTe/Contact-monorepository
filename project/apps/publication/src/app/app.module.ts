@@ -10,6 +10,7 @@ import {CommentModule} from './comment/comment.module';
 import {LikeModule} from './like/like.module';
 import {FindPublicationModule} from './find-publication/find-publication.module';
 import {ListPublicationModule} from './list-publication/list-publication.module';
+import {ConfigUserModule} from '@project/config-user';
 
 @Module({
   imports: [
@@ -22,7 +23,8 @@ import {ListPublicationModule} from './list-publication/list-publication.module'
     CommentModule,
     LikeModule,
     FindPublicationModule,
-    ListPublicationModule
+    ListPublicationModule,
+    ConfigUserModule
   ]
 })
 export class AppModule {}

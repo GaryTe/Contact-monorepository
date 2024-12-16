@@ -1,5 +1,6 @@
 # Создание и удаление like
-POST  http://localhost:3000/api/like/?idUser=674ef86bbbe20f079fdb30bd&idPublication=31&idLike=12 HTTP/1.1
+POST  http://localhost:2000/api/like/?idPublication=16&idLike=13 HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NGYxOGRhYzA5YjM5ZDRkYTdmODlkNSIsImVtYWlsIjoiVmxhZEBtYWlsLmNvbSIsIm5hbWUiOiJWbGFkIFNhem9ub3YiLCJpYXQiOjE3MzQwODQwNzMsImV4cCI6MTczNDA4NDE5M30.MW5xBsvBxm4Eq1G0v93lx208nOxNwJoWD9bHWfR90xg
 
 ###
 # Получение like

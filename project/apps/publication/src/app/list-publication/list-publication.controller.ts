@@ -1,10 +1,11 @@
-import { Controller, Get, Query, Param } from '@nestjs/common';
+import { Controller, Get, Query, Req, UseGuards } from '@nestjs/common';
+import {Request} from 'express';
 
 import {ListPublicationService} from './list-publication.service';
 import {DetailInformationRdo} from './rdo/detail-information.rdo';
 import {fillDTO} from '@project/helpers';
 import {DataQueryList} from './data-query-list';
-import {DataParamUser} from '../video/data-param-user';
+import {AuthenticationGuard} from '@project/config-user';
 
 @Controller('/list')
 export class ListPublicationController {
@@ -19,9 +20,13 @@ export class ListPublicationController {
     return fillDTO(DetailInformationRdo, dataPublicationsList)
   }
 
-  @Get('/:idUser')
-  public async list(@Param() param: DataParamUser): Promise<DetailInformationRdo> {
-    const dataPublicationsList = await this.listPublicationService.list(param.idUser);
+  @UseGuards(AuthenticationGuard)
+  @Get('/drafts')
+  public async list(
+    @Req() req: Request,
+    ): Promise<DetailInformationRdo> {
+    const [id] = req.headers?.tokenPayload as unknown as string
+    const dataPublicationsList = await this.listPublicationService.list(id);
 
     return fillDTO(DetailInformationRdo, dataPublicationsList)
   }

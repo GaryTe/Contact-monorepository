@@ -3,11 +3,11 @@ import {
   UserRdo,
   AuthorizationUserDto
 } from '../index';
-import {DataQueryUser, DataParamUser} from '@project/typs';
+import {DataQueryUser, DataParamUser, AccessAndRefreshToken} from '@project/typs';
 
 export interface UserControllerInterface {
   create(dto: CreateUserDto): Promise<UserRdo>;
-  authentication(dto: AuthorizationUserDto): Promise<{token: string}>;
-  change(query: DataQueryUser, param: DataParamUser): Promise<void>;
+  authentication(dto: AuthorizationUserDto): Promise<AccessAndRefreshToken>;
+  change(req, query: DataQueryUser, param: DataParamUser): Promise<void>;
   show(param: DataParamUser): Promise<UserRdo>;
 }
