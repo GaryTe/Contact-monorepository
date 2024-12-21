@@ -1,0 +1,23 @@
+services:
+  readme.notify.rabbitmq:
+    image: rabbitmq:3.11-management
+    container_name: readme.notify.rabbitmq
+    ports:
+      - 1088:15672
+      - ${RABBITMQ_PORT}:5672
+    environment:
+      RABBITMQ_DEFAULT_USER: ${RABBITMQ_USER}
+      RABBITMQ_DEFAULT_PASS: ${RABBITMQ_PASSWORD}
+    healthcheck:
+      test: rabbitmq-diagnostics -q ping
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  typoteka.notify.fakesmtp:
+    image: gessnerfl/fake-smtp-server
+    container_name: "readme.notify.fakesmtp"
+    hostname: "fakesmtp"
+    ports:
+      - ${SMTP_PORT}:8025
+      - 1083:8080

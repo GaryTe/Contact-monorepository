@@ -1,25 +1,41 @@
 import { Injectable } from '@nestjs/common';
+import {AmqpConnection} from '@golevelup/nestjs-rabbitmq'
 
 import {QuoteRepository} from './quote.repository';
 import {DataQuote, Publication , DataQueryQuote} from '@project/typs';
 import {BlogQuoteEntity} from './blog-quote.entity';
-import {UpdateQuoteDto} from './index';
-import {filterTags} from '@project/helpers';
+import {UpdateQuoteDto, QuoteRdo} from './index';
+import {filterTags, fillDTO} from '@project/helpers';
+import {State, RabbitRouting} from '@project/enum';
+import {NotifyConfig} from '@project/config-notify';
 
 @Injectable()
 export class QuoteService {
   constructor(
-    private readonly quoteRepository: QuoteRepository
+    private readonly quoteRepository: QuoteRepository,
+    private readonly amqpConnection: AmqpConnection,
+    private readonly config: NotifyConfig
   ) {}
 
-  public async create(dto: DataQuote): Promise<Publication> {
+  public async create(dto: DataQuote, newsletter: boolean): Promise<QuoteRdo> {
     const tagsList = filterTags(dto.tags);
     const dataQuote = new BlogQuoteEntity({
       ...dto,
       tags: tagsList
     });
 
-    return await this.quoteRepository.create(dataQuote);
+    const _dataQuote = await this.quoteRepository.create(dataQuote);
+    const filterDataQuote = fillDTO(QuoteRdo, _dataQuote);
+
+    if(newsletter && filterDataQuote.additional.state === State.Published) {
+        await this.amqpConnection.publish(
+          this.config.get('EXCHANG_NAME'),
+          RabbitRouting.AddSubscriber,
+          {...filterDataQuote}
+        )
+    }
+
+    return filterDataQuote
   }
 
   public async show(idQuote: number): Promise<Publication> {

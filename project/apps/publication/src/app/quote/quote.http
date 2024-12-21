@@ -1,11 +1,12 @@
 # Создание цитаты
-POST  http://localhost:2000/api/quote/ HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NGYxOGRhYzA5YjM5ZDRkYTdmODlkNSIsImVtYWlsIjoiVmxhZEBtYWlsLmNvbSIsIm5hbWUiOiJWbGFkIFNhem9ub3YiLCJpYXQiOjE3MzQwNzY1NDIsImV4cCI6MTczNDA3NjY2Mn0.-bCLwWSApTbj-ajWScH1RqW7yAO_3yxG5UAk0HsMsr4
+POST  http://localhost:2000/api/quote/?newsletter=true HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NGYxOGRhYzA5YjM5ZDRkYTdmODlkNSIsImVtYWlsIjoiVmxhZCBTYXpvbm92IiwibmFtZSI6IlZsYWRAbWFpbC5jb20iLCJpYXQiOjE3MzQ3NzU5NDIsImV4cCI6MTczNDc3NjA2Mn0.0l4cySqiP8GsxE21cL1gTbYBDR_CZEPmwAgxIGYBJgI
 Content-Type: application/json
 
 {
   "text": "Кто, имея знания, делает вид, что не знает, тот выше всех.",
-  "name": "Igor"
+  "name": "Igor",
+  "state": "Опубликовано"
 }
 
 ###

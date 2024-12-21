@@ -15,6 +15,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@project/config-notify": ["shared/config-notify/src/index.ts"],
       "@project/config-user": ["shared/config-user/src/index.ts"],
       "@project/consts": ["shared/consts/src/index.ts"],
       "@project/enum": ["shared/enum/src/index.ts"],

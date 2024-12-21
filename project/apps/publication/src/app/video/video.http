@@ -1,12 +1,12 @@
 # Создание видео
-POST  http://localhost:2000/api/video/ HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NGYxOGRhYzA5YjM5ZDRkYTdmODlkNSIsImVtYWlsIjoiVmxhZEBtYWlsLmNvbSIsIm5hbWUiOiJWbGFkIFNhem9ub3YiLCJpYXQiOjE3MzQwMDk4NTMsImV4cCI6MTczNDAwOTk3M30.mTC4AxCWuZhg3oxsfJhKdq5aZckC3_ChVY-XWQmgyfk
+POST  http://localhost:2000/api/video/?newsletter=true HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NGYxOGRhYzA5YjM5ZDRkYTdmODlkNSIsImVtYWlsIjoiVmxhZCBTYXpvbm92IiwibmFtZSI6IlZsYWRAbWFpbC5jb20iLCJpYXQiOjE3MzQ3MDk1MjQsImV4cCI6MTczNDcwOTY0NH0.iWYFc74LRUq1EhBZ_YaALV3wrl-zwejC46PO8nVSp1Q
 Content-Type: application/json
 
 {
   "name": "Это ссылка на видео с толантлевой девушкой.",
   "link": "https://www.youtube.com/watch?v=_MmOZKh0sSc",
-  "state": "Черновик"
+  "state": "Опубликовано"
 }
 
 ###
@@ -29,4 +29,4 @@ Content-Type: application/json
 ###
 ## Удаление видео
 DELETE   http://localhost:2000/api/video/?idVideo=37 HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NGYxOGRhYzA5YjM5ZDRkYTdmODlkNSIsImVtYWlsIjoiVmxhZEBtYWlsLmNvbSIsIm5hbWUiOiJWbGFkIFNhem9ub3YiLCJpYXQiOjE3MzQwNzQ5MDEsImV4cCI6MTczNDA3NTAyMX0.jA6J2NVaE5Qtg_Zc5q6oTwVhmT8qENPituR9UVnSe9E
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NGYxOGRhYzA5YjM5ZDRkYTdmODlkNSIsImVtYWlsIjoiVmxhZCBTYXpvbm92IiwibmFtZSI6IlZsYWRAbWFpbC5jb20iLCJpYXQiOjE3MzQ1OTE2MzEsImV4cCI6MTczNDY3ODAzMX0.zEEsKOcDXQcmFsfD-9v97SqZhqC_Kf6WlhcTS9M-K9Q

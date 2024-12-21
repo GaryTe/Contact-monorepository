@@ -11,6 +11,7 @@ import {LikeModule} from './like/like.module';
 import {FindPublicationModule} from './find-publication/find-publication.module';
 import {ListPublicationModule} from './list-publication/list-publication.module';
 import {ConfigUserModule} from '@project/config-user';
+import {ConfigNotifyModule} from '@project/config-notify';
 
 @Module({
   imports: [
@@ -24,7 +25,8 @@ import {ConfigUserModule} from '@project/config-user';
     LikeModule,
     FindPublicationModule,
     ListPublicationModule,
-    ConfigUserModule
+    ConfigUserModule,
+    ConfigNotifyModule
   ]
 })
 export class AppModule {}

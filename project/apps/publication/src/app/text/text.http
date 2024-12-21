@@ -1,12 +1,13 @@
 # Создание текст
-POST  http://localhost:2000/api/text/ HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NGYxOGRhYzA5YjM5ZDRkYTdmODlkNSIsImVtYWlsIjoiVmxhZEBtYWlsLmNvbSIsIm5hbWUiOiJWbGFkIFNhem9ub3YiLCJpYXQiOjE3MzQwNzM3NDksImV4cCI6MTczNDA3Mzg2OX0.X5s4suo5OCpF4yOYCh9cNGLhv39ckOJXo97yccANPHg
+POST  http://localhost:2000/api/text/?newsletter=true HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NGYxOGRhYzA5YjM5ZDRkYTdmODlkNSIsImVtYWlsIjoiVmxhZEBtYWlsLmNvbSIsIm5hbWUiOiJWbGFkIFNhem9ub3YiLCJpYXQiOjE3MzQ3MDkzNjMsImV4cCI6MTczNDcwOTQ4M30.cyne7X-dR8NJAITfCGlbuRlWD83Kot94a0JJG5aCoZk
 Content-Type: application/json
 
 {
   "name": "В Дубаи. Поездка на две нидели.",
   "preview": "Как поездка в Дубай, обошлась не дорого но получил уйму впечетлений.",
-  "text": "В четверг с группой вылители сомалетом вечером. Полет до Дубай был спокойный, уймо знакомств и общения."
+  "text": "В четверг с группой вылители сомалетом вечером. Полет до Дубай был спокойный, уймо знакомств и общения.",
+  "state": "Опубликовано"
 }
 
 ###

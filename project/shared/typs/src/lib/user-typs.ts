@@ -16,6 +16,13 @@ export type DataConnection = {
   authDatabase: string
 }
 
+export type DataConnectionRebbitMQ = {
+  host: string;
+  password: string;
+  user: string;
+  port: string;
+}
+
 export type DataUser = {
   email: string;
   name: string;

@@ -1,25 +1,41 @@
 import { Injectable } from '@nestjs/common';
+import {AmqpConnection} from '@golevelup/nestjs-rabbitmq';
 
 import {VideoRepository} from './video.repository';
 import {DataVideo,Publication , DataQueryVideo} from '@project/typs';
 import {BlogVideoEntity} from './blog-video.entity';
-import {UpdateVideoDto} from './index';
-import {filterTags} from '@project/helpers';
+import {UpdateVideoDto, VideoRdo} from './index';
+import {filterTags, fillDTO} from '@project/helpers';
+import {RabbitRouting, State} from '@project/enum';
+import {NotifyConfig} from '@project/config-notify';
 
 @Injectable()
 export class VideoService {
   constructor(
-    private readonly videoRepository: VideoRepository
+    private readonly videoRepository: VideoRepository,
+    private readonly amqpConnection: AmqpConnection,
+    private readonly config: NotifyConfig
   ) {}
 
-  public async create(dto: DataVideo): Promise<Publication> {
+  public async create(dto: DataVideo, newsletter: boolean): Promise<VideoRdo> {
     const tagsList = filterTags(dto.tags);
     const dataVideo = new BlogVideoEntity({
       ...dto,
       tags: tagsList
     });
 
-    return await this.videoRepository.create(dataVideo);
+    const _dataVideo = await this.videoRepository.create(dataVideo);
+    const filterDataVideo = fillDTO(VideoRdo, _dataVideo);
+
+    if(newsletter && filterDataVideo.additional.state === State.Published) {
+        await this.amqpConnection.publish(
+          this.config.get('EXCHANG_NAME'),
+          RabbitRouting.AddSubscriber,
+          {...filterDataVideo}
+        )
+      }
+
+        return filterDataVideo
   }
 
   public async show(idVideo: number): Promise<Publication> {

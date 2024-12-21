@@ -30,11 +30,13 @@ export class TextController {
   @Post('/')
   public async create(
     @Req() req: Request,
-    @Body() dto: CreateTextDto
+    @Body() dto: CreateTextDto,
+    @Query('newsletter') newsletter: boolean
   ): Promise<TextRdo> {
     const [id] = req.headers?.tokenPayload as unknown as string
-    const dataText = await this.textService.create({...dto, idUser: id});
-    return fillDTO(TextRdo, dataText)
+    const dataText = await this.textService.create({...dto, idUser: id}, newsletter);
+
+    return dataText
   }
 
   @Get('/:idText')
