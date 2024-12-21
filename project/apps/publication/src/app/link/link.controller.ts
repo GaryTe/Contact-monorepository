@@ -30,11 +30,12 @@ export class LinkController {
   @Post('/')
   public async create(
     @Req() req: Request,
-    @Body() dto: CreateLinkDto
+    @Body() dto: CreateLinkDto,
+    @Query('newsletter') newsletter: boolean
   ): Promise<LinkRdo> {
     const [id] = req.headers?.tokenPayload as unknown as string
-    const dataLink = await this.linkService.create({...dto, idUser: id});
-    return fillDTO(LinkRdo, dataLink)
+    const dataLink = await this.linkService.create({...dto, idUser: id}, newsletter);
+    return dataLink
   }
 
   @Get('/:idLink')

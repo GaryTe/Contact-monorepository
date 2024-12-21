@@ -31,10 +31,12 @@ export class VideoController {
   public async create(
     @Req() req: Request,
     @Body() dto: CreateVideoDto,
+    @Query('newsletter') newsletter: boolean
   ): Promise<VideoRdo> {
     const [id] = req.headers?.tokenPayload as unknown as string
-    const dataVideo = await this.videoService.create({...dto, idUser: id});
-    return fillDTO(VideoRdo, dataVideo)
+    const dataVideo = await this.videoService.create({...dto, idUser: id}, newsletter);
+
+    return dataVideo
   }
 
   @Get('/:idVideo')

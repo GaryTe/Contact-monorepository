@@ -30,11 +30,13 @@ export class PhotoController {
   @Post('/')
   public async create(
     @Req() req: Request,
-    @Body() dto: CreatePhotoDto
+    @Body() dto: CreatePhotoDto,
+    @Query('newsletter') newsletter: boolean
   ): Promise<PhotoRdo> {
     const [id] = req.headers?.tokenPayload as unknown as string
-    const dataPhoto = await this.photoService.create({...dto, idUser: id});
-    return fillDTO(PhotoRdo, dataPhoto)
+    const dataPhoto = await this.photoService.create({...dto, idUser: id}, newsletter);
+
+    return dataPhoto
   }
 
   @Get('/:idPhoto')

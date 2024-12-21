@@ -1,25 +1,41 @@
 import { Injectable } from '@nestjs/common';
+import {AmqpConnection} from '@golevelup/nestjs-rabbitmq';
 
 import {LinkRepository} from './link.repository';
 import {DataLink, Publication , DataQueryLink} from '@project/typs';
 import {BlogLinkEntity} from './blog-link.entity';
-import {UpdateLinkDto} from './index';
-import {filterTags} from '@project/helpers';
+import {UpdateLinkDto, LinkRdo} from './index';
+import {filterTags, fillDTO} from '@project/helpers';
+import {State, RabbitRouting} from '@project/enum';
+import {NotifyConfig} from '@project/config-notify';
 
 @Injectable()
 export class LinkService {
   constructor(
-    private readonly linkRepository: LinkRepository
+    private readonly linkRepository: LinkRepository,
+    private readonly amqpConnection: AmqpConnection,
+    private readonly config: NotifyConfig
   ) {}
 
-  public async create(dto: DataLink): Promise<Publication> {
+  public async create(dto: DataLink, newsletter: boolean): Promise<LinkRdo> {
     const tagsList = filterTags(dto.tags);
     const dataLink = new BlogLinkEntity({
       ...dto,
       tags: tagsList
     });
 
-    return await this.linkRepository.create(dataLink);
+    const _dataLink = await this.linkRepository.create(dataLink);
+    const filterDataLink = fillDTO(LinkRdo, _dataLink);
+
+    if(newsletter && filterDataLink.additional.state === State.Published) {
+        await this.amqpConnection.publish(
+          this.config.get('EXCHANG_NAME'),
+          RabbitRouting.AddSubscriber,
+          {...filterDataLink}
+        )
+    }
+
+    return filterDataLink
   }
 
   public async show(idLink: number): Promise<Publication> {

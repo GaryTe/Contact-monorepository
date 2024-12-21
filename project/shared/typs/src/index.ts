@@ -8,3 +8,4 @@ export * from './lib/repost-type';
 export * from './lib/comment-type';
 export * from './lib/like-type';
 export * from './lib/list-type';
+export * from './lib/notify-type';

@@ -2,7 +2,7 @@ import {ClassConstructor, plainToInstance} from 'class-transformer';
 import {ValidatorConstraint, ValidatorConstraintInterface} from 'class-validator';
 import {Types} from 'mongoose';
 
-import {DataConnection} from '@project/typs';
+import {DataConnection, DataConnectionRebbitMQ} from '@project/typs';
 import {
   VALUE_YOU_TUBE,
   REGULAR_FOR_ENG
@@ -21,6 +21,14 @@ export function getMongoConnectionString({
   port
 }: DataConnection): string {
   return `mongodb://${username}:${password}@${host}:${port}/`;
+}
+
+export function getRabbitMQConnectionString({
+  user,
+  password,
+  host,
+  port}: DataConnectionRebbitMQ): string {
+  return `amqp://${user}:${password}@${host}:${port}`;
 }
 
 export const filterTags = (value: string[]) => {

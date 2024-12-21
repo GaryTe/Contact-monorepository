@@ -30,11 +30,13 @@ export class QuoteController {
   @Post('/')
   public async create(
     @Req() req: Request,
-    @Body() dto: CreateQuoteDto
+    @Body() dto: CreateQuoteDto,
+    @Query('newsletter') newsletter: boolean
   ): Promise<QuoteRdo> {
     const [id] = req.headers?.tokenPayload as unknown as string
-    const dataQuote = await this.quoteService.create({...dto, idUser: id});
-    return fillDTO(QuoteRdo, dataQuote)
+    const dataQuote = await this.quoteService.create({...dto, idUser: id}, newsletter);
+
+    return dataQuote
   }
 
   @Get('/:idQuote')
