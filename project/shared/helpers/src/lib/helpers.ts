@@ -10,9 +10,15 @@ import {
 import {Tag} from '@project/enum';
 
 
+export function getFullServerPath(host: string, port: string | number) {
+  return `http://${host}:${port}`;
+}
+
+
 export function fillDTO<T, V>(someDto: ClassConstructor<T>, plainObject: V) {
   return plainToInstance(someDto, plainObject, { excludeExtraneousValues: true });
 }
+
 
 export function getMongoConnectionString({
   username,
@@ -23,6 +29,7 @@ export function getMongoConnectionString({
   return `mongodb://${username}:${password}@${host}:${port}/`;
 }
 
+
 export function getRabbitMQConnectionString({
   user,
   password,
@@ -30,6 +37,7 @@ export function getRabbitMQConnectionString({
   port}: DataConnectionRebbitMQ): string {
   return `amqp://${user}:${password}@${host}:${port}`;
 }
+
 
 export const filterTags = (value: string[]) => {
   if(!value || value.length === 0) {
@@ -39,6 +47,7 @@ export const filterTags = (value: string[]) => {
   const _tagsList = tagsList.filter((value, index, array) => array.indexOf(value) === index)
   return _tagsList
 }
+
 
 @ValidatorConstraint({ name: 'idUser', async: false })
 export class ValidationIdUser implements ValidatorConstraintInterface {
@@ -51,6 +60,7 @@ export class ValidationIdUser implements ValidatorConstraintInterface {
   }
 }
 
+
 @ValidatorConstraint({ name: 'name', async: false })
 export class ValidationName implements ValidatorConstraintInterface {
   validate(name: string) {
@@ -61,6 +71,7 @@ export class ValidationName implements ValidatorConstraintInterface {
     return true
   }
 }
+
 
 @ValidatorConstraint({ name: 'videoLink', async: false })
 export class ValidationVideoLink implements ValidatorConstraintInterface {
@@ -74,6 +85,7 @@ export class ValidationVideoLink implements ValidatorConstraintInterface {
   }
 }
 
+
 @ValidatorConstraint({ name: 'tagsList', async: false })
 export class ValidationTagsList implements ValidatorConstraintInterface {
   validate(tags: string[]) {
@@ -84,6 +96,7 @@ export class ValidationTagsList implements ValidatorConstraintInterface {
     return true
   }
 }
+
 
 @ValidatorConstraint({ name: 'space', async: false })
 export class ValidationSpace implements ValidatorConstraintInterface {
@@ -100,6 +113,7 @@ export class ValidationSpace implements ValidatorConstraintInterface {
   }
 }
 
+
 @ValidatorConstraint({ name: 'letter', async: false })
 export class ValidationLetter implements ValidatorConstraintInterface {
   validate(tags: string[]) {
@@ -113,6 +127,7 @@ export class ValidationLetter implements ValidatorConstraintInterface {
     return isValue
   }
 }
+
 
 @ValidatorConstraint({ name: 'tagLength', async: false })
 export class ValidationTagLength implements ValidatorConstraintInterface {

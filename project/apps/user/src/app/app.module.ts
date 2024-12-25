@@ -5,7 +5,7 @@ import { BlogUserModule } from './blog-user/blog-user.module';
 import { UserActionsModule } from './user-actions/user-actions.module';
 import {ConfigUserModule, getMongooseOptions} from '@project/config-user';
 import {BlogRefreshTokenModule} from './blog-refresh-token/blog-refresh-token.module';
-
+import {FileModule} from '@project/file';
 
 @Module({
   imports: [
@@ -13,6 +13,7 @@ import {BlogRefreshTokenModule} from './blog-refresh-token/blog-refresh-token.mo
     UserActionsModule,
     ConfigUserModule,
     BlogRefreshTokenModule,
+    FileModule,
     MongooseModule.forRootAsync(
       getMongooseOptions()
     )

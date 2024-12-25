@@ -30,3 +30,8 @@ export enum Tag {
   MaxTagLength = 10,
   Space = ' '
 }
+
+export enum ExtensionPhoto {
+  Jpg = 'jpg',
+  Png = 'png'
+}

@@ -26,3 +26,8 @@ export const query = {
     isString: 'The newPassword parameter is not valid. Type string.'
   }
 }
+
+export const avatar = {
+  size: 'File size is greater than 500 Kb',
+  extension: 'File extension does not match jpeg, png'
+}

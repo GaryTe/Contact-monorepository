@@ -10,3 +10,8 @@ export const photoTags = {
 export const photoState = 'The state field is not valid. The value may be Черновик or Опубликовано.'
 
 export const idPhoto = 'The idPhoto parameter is not valid. Enter the photo id.'
+
+export const uploadPhoto = {
+  size: 'File size is greater than 1 Mb',
+  extension: 'File extension does not match jpg, png'
+}
