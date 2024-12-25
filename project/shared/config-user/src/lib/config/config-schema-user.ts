@@ -14,8 +14,11 @@ export type ConfigSchema = {
   JWT_REFRESH_SECRET: string;
   JWT_ALGORITHM: string;
   TYP: string;
-  JWT_ACCESS_EXPIRED: string
-  JWT_REFRESH_EXPIRED: string
+  JWT_ACCESS_EXPIRED: string;
+  JWT_REFRESH_EXPIRED: string;
+  HOST: string;
+  UPLOAD_DIRECTORY: string;
+  STATIC_DIRECTORY: string
 }
 
 export const configSchemaUser = convict<ConfigSchema>({
@@ -90,5 +93,23 @@ export const configSchemaUser = convict<ConfigSchema>({
     format: String,
     env: 'JWT_REFRESH_EXPIRED',
     default: null
-  }
+  },
+  HOST: {
+    doc: 'Host for the user is Avatar',
+    format: String,
+    env: 'HOST',
+    default: 'localhost'
+  },
+  UPLOAD_DIRECTORY: {
+    doc: 'Directory for upload files',
+    format: String,
+    env: 'UPLOAD_DIRECTORY',
+    default: null
+  },
+  STATIC_DIRECTORY: {
+    doc: 'Directory for static files',
+    format: String,
+    env: 'STATIC_DIRECTORY',
+    default: null
+  },
 });

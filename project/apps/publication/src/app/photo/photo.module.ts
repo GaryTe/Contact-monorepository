@@ -7,13 +7,15 @@ import {PhotoRepository} from './photo.repository';
 import {PrismaClientModule} from '@project/prisma-publication.configuration';
 import {ConfigUserModule} from '@project/config-user';
 import {getRabbitMQOptions} from '@project/config-notify';
-import {ConfigNotifyModule} from '@project/config-notify'
+import {ConfigNotifyModule} from '@project/config-notify';
+import {FileModule} from '@project/file'
 
 @Module({
   imports: [
     PrismaClientModule,
     ConfigUserModule,
     ConfigNotifyModule,
+    FileModule,
     RabbitMQModule.forRootAsync(
       RabbitMQModule,
       getRabbitMQOptions()

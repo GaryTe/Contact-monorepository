@@ -12,6 +12,7 @@ import {FindPublicationModule} from './find-publication/find-publication.module'
 import {ListPublicationModule} from './list-publication/list-publication.module';
 import {ConfigUserModule} from '@project/config-user';
 import {ConfigNotifyModule} from '@project/config-notify';
+import {FileModule} from '@project/file';
 
 @Module({
   imports: [
@@ -26,7 +27,8 @@ import {ConfigNotifyModule} from '@project/config-notify';
     FindPublicationModule,
     ListPublicationModule,
     ConfigUserModule,
-    ConfigNotifyModule
+    ConfigNotifyModule,
+    FileModule
   ]
 })
 export class AppModule {}

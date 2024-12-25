@@ -1,10 +1,23 @@
+POST http://localhost:2000/api/photo/upload HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NmI5Y2Q1ZTVhMWY0ZmMyYTcxMDczNyIsImVtYWlsIjoiVGFueSBTYXpvbm92YSIsIm5hbWUiOiJUYW55QG1haWwuY29tIiwiaWF0IjoxNzM1MTI5NTgzLCJleHAiOjE3MzUxMjk3MDN9.Ph1tpoP-b8QOb8-5nFYt-5fNK7dIJ8cUcYsVMETwb1M
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
+
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="photo"; filename="userpic-big.jpg"
+Content-Type: image/jpg
+
+< C:/Users/User/Desktop/readme/markup/img/userpic-big.jpg
+------WebKitFormBoundary7MA4YWxkTrZu0gW--
+
+###
 # Создание фото
-POST  http://localhost:2000/api/photo/ HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NGYxOGRhYzA5YjM5ZDRkYTdmODlkNSIsImVtYWlsIjoiVmxhZEBtYWlsLmNvbSIsIm5hbWUiOiJWbGFkIFNhem9ub3YiLCJpYXQiOjE3MzQwNzc1MDYsImV4cCI6MTczNDA3NzYyNn0.bK1KwD-L4kOGiY08gjALBOgAfkAi8QS0AUKedewTxAA
+POST  http://localhost:2000/api/photo/?newsletter=true HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NmI5Y2Q1ZTVhMWY0ZmMyYTcxMDczNyIsImVtYWlsIjoiVGFueSBTYXpvbm92YSIsIm5hbWUiOiJUYW55QG1haWwuY29tIiwiaWF0IjoxNzM1MTI5NTgzLCJleHAiOjE3MzUxMjk3MDN9.Ph1tpoP-b8QOb8-5nFYt-5fNK7dIJ8cUcYsVMETwb1M
 Content-Type: application/json
 
 {
-  "photo": "http://localhost:3000/upload/b01a423d-0ac8-46d7-a50b-f005c4525080.jpg"
+  "photo": "/upload/2024/12/28c536cd-3b34-4a6e-95f1-84893c79d8ce.jpg",
+  "state": "Опубликовано"
 }
 
 ###

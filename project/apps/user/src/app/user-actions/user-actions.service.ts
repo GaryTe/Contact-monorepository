@@ -6,7 +6,8 @@ import {DataQueryUser, AccessAndRefreshToken} from '@project/typs';
 import {BlogUserModel, BlogUserEntity} from '../blog-user/index';
 import {BlogRefreshTokenRepository} from '../blog-refresh-token/blog-refresh-token.repository';
 import {AuthenticationUser} from './authentication-user';
-import {UserConfig} from '@project/config-user'
+import {UserConfig} from '@project/config-user';
+import {STATIC_FILES_ROUTE, STATIC_IMAGES} from '@project/consts';
 
 @Injectable()
 export class UserActionsService implements UserServiceInterface {
@@ -18,6 +19,7 @@ export class UserActionsService implements UserServiceInterface {
   ) {}
 
   public async create(dto: CreateUserDto): Promise<BlogUserModel> {
+    dto.avatar = dto.avatar ?? `${STATIC_FILES_ROUTE}${STATIC_IMAGES}`;
     const dataUser = new BlogUserEntity(dto)
 
     return await this.blogUserRepository.findOrCreate(dataUser);

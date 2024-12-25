@@ -1,11 +1,17 @@
 import { Logger, ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
+import express from 'express';
 
 import { AppModule } from './app/app.module';
-import {GLOBAL_PEFIX} from '@project/consts';
+import {GLOBAL_PEFIX, STATIC_UPLOAD_PHOTO_ROUTE} from '@project/consts';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+
+  app.use(
+    `/${GLOBAL_PEFIX}${STATIC_UPLOAD_PHOTO_ROUTE}`,
+    express.static(process.env.UPLOAD_PHOTO_DIRECTORY)
+  );
 
   app.setGlobalPrefix(GLOBAL_PEFIX);
   app.useGlobalPipes(new ValidationPipe())

@@ -6,13 +6,13 @@ import {
   Param,
   Query,
   Patch,
-  UploadedFile,
-  UseInterceptors,
   UseGuards,
-  Req
+  Req,
+  UseInterceptors,
+  UploadedFile
 } from '@nestjs/common';
-import {Express, Request} from 'express';
 import {FileInterceptor} from '@nestjs/platform-express';
+import {Express, Request} from 'express';
 import 'multer';
 
 import {UserActionsService} from './user-actions.service';
@@ -25,26 +25,34 @@ import {
   DataParamUser,
   DataQueryUser
 } from './index';
-import {fillDTO} from '@project/helpers';
+import {fillDTO, getFullServerPath} from '@project/helpers';
 import {AccessAndRefreshToken} from '@project/typs';
 import {AuthenticationGuard, AuthorizationGuard} from '@project/config-user';
+import {UserConfig} from '@project/config-user';
+import {GLOBAL_PEFIX, AVATAR_NAME} from '@project/consts';
+import {UploadFile, AvatarValidationPipe} from '@project/file';
 
 @Controller('/user/')
 export class UserActionsController implements UserControllerInterface {
 constructor(
   private readonly userActionsService: UserActionsService,
-  private readonly authenticationUser: AuthenticationUser
+  private readonly authenticationUser: AuthenticationUser,
+  private readonly userConfig: UserConfig,
+  private readonly uploadFile: UploadFile
 ) {}
 
 @Post('avatar')
-@UseInterceptors(FileInterceptor('avatar'))
-public async uploadAvatar(@UploadedFile() file: Express.Multer.File) {
-  console.log(file)
+@UseInterceptors(FileInterceptor(AVATAR_NAME))
+public async uploadAvatar(@UploadedFile(new AvatarValidationPipe()) file: Express.Multer.File) {
+  const avatarPath = await this.uploadFile.execute(file, this.userConfig.get('UPLOAD_DIRECTORY'))
+  return avatarPath
 }
 
 @Post('registration')
 public async create(@Body() dto: CreateUserDto): Promise<UserRdo> {
   const dataUser = await this.userActionsService.create(dto)
+  dataUser.avatar = `${getFullServerPath(this.userConfig.get('HOST'), this.userConfig.get('PORT'))}/${GLOBAL_PEFIX}${dataUser.avatar}`
+
   return fillDTO(UserRdo, dataUser)
 }
 
@@ -53,6 +61,7 @@ public async authentication(@Body() dto: AuthorizationUserDto): Promise<AccessAn
   const dataUser = await this.authenticationUser.verify(dto);
   const parAccessTokenAndRefreshToken = await this.authenticationUser.authenticate(dataUser);
   await this.userActionsService.authentication(dataUser, parAccessTokenAndRefreshToken)
+
   return parAccessTokenAndRefreshToken
 }
 
@@ -69,6 +78,8 @@ public async change(
 @Get(':idUser')
 public async show(@Param() param: DataParamUser): Promise<UserRdo> {
   const dataUser = await this.userActionsService.show(param.idUser);
+  dataUser.avatar = `${getFullServerPath(this.userConfig.get('HOST'), this.userConfig.get('PORT'))}/${GLOBAL_PEFIX}${dataUser.avatar}`
+
   return fillDTO(UserRdo, dataUser)
 }
 
