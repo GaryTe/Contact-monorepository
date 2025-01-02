@@ -1,6 +1,7 @@
 import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
 import {Model} from 'mongoose';
 import {InjectModel} from '@nestjs/mongoose';
+import { ConsumeMessage } from 'amqplib';
 
 import {UserRepositoryInterface} from '../user-actions/index';
 import {BlogUserEntity, BlogUserModel} from './index';
@@ -39,8 +40,12 @@ export class BlogUserRepository implements UserRepositoryInterface {
     return await this.create(dataUser);
   }
 
-  public async findByid(id: string): Promise<BlogUserModel | null> {
+  public async findByid(id: string, amqpMsg?: ConsumeMessage): Promise<BlogUserModel | null> {
     const dataUser = await this.blogUserModel.findOne({_id: id});
+
+    if(amqpMsg !== undefined && !dataUser) {
+      return null
+    }
 
     if(!dataUser) {
       throw new HttpException(

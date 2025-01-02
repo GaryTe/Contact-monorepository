@@ -5,7 +5,7 @@ import {Types} from 'mongoose';
 import {DataConnection, DataConnectionRebbitMQ} from '@project/typs';
 import {
   VALUE_YOU_TUBE,
-  REGULAR_FOR_ENG
+  REGULAR_FOR_ENG,
 } from '@project/consts';
 import {Tag} from '@project/enum';
 

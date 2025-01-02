@@ -11,7 +11,9 @@ export type ConfigSchema = {
   EXCHANG_NAME: string,
   EXCHANG_TYPE: string,
   SMTP_PORT: string,
-  SMTP_FROM: string
+  SMTP_FROM: string,
+  EXCHANG_PUBLICATION: string,
+  EXCHANG_USER: string
 }
 
 export const configSchemaNotify = convict<ConfigSchema>({
@@ -61,6 +63,18 @@ export const configSchemaNotify = convict<ConfigSchema>({
     doc: 'Email address name for SMTP',
     format: String,
     env: 'SMTP_FROM',
+    default: null
+  },
+  EXCHANG_PUBLICATION: {
+    doc: 'Exchanger name (RabbitMQ)',
+    format: String,
+    env: 'EXCHANG_PUBLICATION',
+    default: null
+  },
+  EXCHANG_USER: {
+    doc: 'Exchanger name (RabbitMQ)',
+    format: String,
+    env: 'EXCHANG_USER',
     default: null
   }
 });

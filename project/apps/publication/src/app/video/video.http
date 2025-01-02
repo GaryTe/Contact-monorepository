@@ -1,6 +1,6 @@
 # Создание видео
 POST  http://localhost:2000/api/video/?newsletter=true HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NGYxOGRhYzA5YjM5ZDRkYTdmODlkNSIsImVtYWlsIjoiVmxhZCBTYXpvbm92IiwibmFtZSI6IlZsYWRAbWFpbC5jb20iLCJpYXQiOjE3MzQ3MDk1MjQsImV4cCI6MTczNDcwOTY0NH0.iWYFc74LRUq1EhBZ_YaALV3wrl-zwejC46PO8nVSp1Q
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NmI5Y2Q1ZTVhMWY0ZmMyYTcxMDczNyIsImVtYWlsIjoiVGFueUBtYWlsLmNvbSIsIm5hbWUiOiJUYW55IFNhem9ub3ZhIiwiaWF0IjoxNzM1MzA0NTM4LCJleHAiOjE3MzUzMDQ2NTh9.hIgxZetGWMfSCJbejYl1a9SzR9BU93aWpytR3vprBxs
 Content-Type: application/json
 
 {
@@ -11,22 +11,24 @@ Content-Type: application/json
 
 ###
 # Получение детальной информации по видео
-GET   http://localhost:3000/api/video/25 HTTP/1.1
+GET   http://localhost:2000/api/video/64 HTTP/1.1
 
 ###
 ## Редактирование видео
-PATCH  http://localhost:2000/api/video/?idVideo=35 HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NGYxOGRhYzA5YjM5ZDRkYTdmODlkNSIsImVtYWlsIjoiVmxhZEBtYWlsLmNvbSIsIm5hbWUiOiJWbGFkIFNhem9ub3YiLCJpYXQiOjE3MzQwMTA2NDQsImV4cCI6MTczNDAxMDc2NH0.K5ipzT5Zv4Cj5xxZazUNuGD6n1SDyn7MaDlFfjfe2jo
+PATCH  http://localhost:2000/api/video/?idVideo=63 HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NmI5Y2Q1ZTVhMWY0ZmMyYTcxMDczNyIsImVtYWlsIjoiVGFueSBTYXpvbm92YSIsIm5hbWUiOiJUYW55QG1haWwuY29tIiwiaWF0IjoxNzM1Mzg1NjUyLCJleHAiOjE3MzUzODU3NzJ9.feIRzRXtVxtZ20imGr2v4GDOayl7urkDRyFHJqRQaOE
 Content-Type: application/json
 
 {
   "tags": [
-    "Vlad"
+    "Vlad",
+    "UnidentifiedRaccoon"
   ],
-  "state": "Опубликовано"
+  "state": "Черновик"
 }
 
 ###
 ## Удаление видео
-DELETE   http://localhost:2000/api/video/?idVideo=37 HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NGYxOGRhYzA5YjM5ZDRkYTdmODlkNSIsImVtYWlsIjoiVmxhZCBTYXpvbm92IiwibmFtZSI6IlZsYWRAbWFpbC5jb20iLCJpYXQiOjE3MzQ1OTE2MzEsImV4cCI6MTczNDY3ODAzMX0.zEEsKOcDXQcmFsfD-9v97SqZhqC_Kf6WlhcTS9M-K9Q
+DELETE   http://localhost:2000/api/video/?idVideo=63 HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NmI5Y2Q1ZTVhMWY0ZmMyYTcxMDczNyIsImVtYWlsIjoiVGFueUBtYWlsLmNvbSIsIm5hbWUiOiJUYW55IFNhem9ub3ZhIiwiaWF0IjoxNzM1Mzg2MDc4LCJleHAiOjE3MzUzODYxOTh9.NRbxdAXnwIZlk-bApwHg1OBZe84S14mhsobE46D1F2Y
+Content-Type: application/json

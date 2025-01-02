@@ -1,6 +1,6 @@
 # Создание цитаты
 POST  http://localhost:2000/api/quote/?newsletter=true HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NGYxOGRhYzA5YjM5ZDRkYTdmODlkNSIsImVtYWlsIjoiVmxhZCBTYXpvbm92IiwibmFtZSI6IlZsYWRAbWFpbC5jb20iLCJpYXQiOjE3MzQ3NzU5NDIsImV4cCI6MTczNDc3NjA2Mn0.0l4cySqiP8GsxE21cL1gTbYBDR_CZEPmwAgxIGYBJgI
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NmI5Y2Q1ZTVhMWY0ZmMyYTcxMDczNyIsImVtYWlsIjoiVGFueSBTYXpvbm92YSIsIm5hbWUiOiJUYW55QG1haWwuY29tIiwiaWF0IjoxNzM1NDc2NTkyLCJleHAiOjE3MzU0NzY3MTJ9.diGdsXlYyEu3MAtZBnT5RwpaTpps2Z0liGYxHlGQFm8
 Content-Type: application/json
 
 {
@@ -11,7 +11,7 @@ Content-Type: application/json
 
 ###
 # Получение детальной информации по цитате
-GET   http://localhost:3000/api/quote/15 HTTP/1.1
+GET   http://localhost:2000/api/quote/66 HTTP/1.1
 
 ###
 ## Редактирование цитаты
@@ -28,5 +28,5 @@ Content-Type: application/json
 
 ###
 ## Удаление цитаты
-DELETE   http://localhost:2000/api/quote/?idQuote=39 HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NGYxOGRhYzA5YjM5ZDRkYTdmODlkNSIsImVtYWlsIjoiVmxhZEBtYWlsLmNvbSIsIm5hbWUiOiJWbGFkIFNhem9ub3YiLCJpYXQiOjE3MzQwNzY2NzcsImV4cCI6MTczNDA3Njc5N30.t_5PsLQOq02RgEWm9WUTZRHttnGDziphxPrzSJGQGBw
+DELETE   http://localhost:2000/api/quote/?idQuote=66 HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NmI5Y2Q1ZTVhMWY0ZmMyYTcxMDczNyIsImVtYWlsIjoiVGFueUBtYWlsLmNvbSIsIm5hbWUiOiJUYW55IFNhem9ub3ZhIiwiaWF0IjoxNzM1NDc2NzcwLCJleHAiOjE3MzU0NzY4OTB9.Q7E9sWu-LsrlbSTm9UT3RPEj_2zrD6UwjAygbB7VNPY

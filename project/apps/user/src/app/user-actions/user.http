@@ -38,9 +38,9 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NGYxOGRhY
 
 ###
 ## Запросить детальную информацию по определенному пользователю
-GET http://localhost:6500/api/user/67696a787e5d16838ca2c398 HTTP/1.1
+GET http://localhost:6500/api/user/6763c3c4e58f2306b5a50a90 HTTP/1.1
 
 ###
 ## Получение новой пары  accessToken и refreshToken
 POST  http://localhost:6500/api/user/tokens HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NGYxOGRhYzA5YjM5ZDRkYTdmODlkNSIsImVtYWlsIjoiVmxhZCBTYXpvbm92IiwibmFtZSI6IlZsYWRAbWFpbC5jb20iLCJpYXQiOjE3MzQ3NzU5NDIsImV4cCI6MTczNDg2MjM0Mn0.5OePbYBVLaoKV-IyHrCw74DiYYelZUUaLPAEg-K06dY
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NmI5Y2Q1ZTVhMWY0ZmMyYTcxMDczNyIsImVtYWlsIjoiVGFueUBtYWlsLmNvbSIsIm5hbWUiOiJUYW55IFNhem9ub3ZhIiwiaWF0IjoxNzM1NzQ4NjQ2LCJleHAiOjE3MzU4MzUwNDZ9.-2YkVZvTnMToNnIBA9FcupJat2LN9auX-hImygWOr3I

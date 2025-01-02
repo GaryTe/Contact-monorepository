@@ -1,7 +1,7 @@
 # Получение списка публикаций
-GET   http://localhost:2000/api/list/?sort=like HTTP/1.1
+GET   http://localhost:2000/api/list/?idUser=674ef86bbbe20f079fdb30bd HTTP/1.1
 
 ###
 # Получение списка публикаций(черновик)
 GET   http://localhost:2000/api/list/drafts HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NGYxOGRhYzA5YjM5ZDRkYTdmODlkNSIsImVtYWlsIjoiVmxhZEBtYWlsLmNvbSIsIm5hbWUiOiJWbGFkIFNhem9ub3YiLCJpYXQiOjE3MzQwODIyMTcsImV4cCI6MTczNDA4MjMzN30.e654Xzt4zA4fkyjpxZXY7zCAkLrTF5k8HjZG8wKm6PU
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NmI5Y2Q1ZTVhMWY0ZmMyYTcxMDczNyIsImVtYWlsIjoiVGFueUBtYWlsLmNvbSIsIm5hbWUiOiJUYW55IFNhem9ub3ZhIiwiaWF0IjoxNzM1NjMzMTUwLCJleHAiOjE3MzU2MzMyNzB9.KpnHMu7NL1IBTRARhWb-6CJQoVet_4C_23sEsaWt_A8

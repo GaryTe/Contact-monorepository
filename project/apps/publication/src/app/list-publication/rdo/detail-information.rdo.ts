@@ -4,6 +4,14 @@ class AdditionalData {
   @Expose()
   public idUser: string;
 
+  @Expose()
+  public author: {
+    id: string,
+    name: string,
+    email: string,
+    avatar: string
+  };
+
   @Transform(({value, obj}) => value ?? obj.key)
   @Expose()
   public name: string;
@@ -24,6 +32,14 @@ class AdditionalData {
 
   @Expose()
   public originalIdUser: string;
+
+  @Expose()
+  public originaUser: {
+    id: string,
+    name: string,
+    email: string,
+    avatar: string
+  };
 
   @Expose()
   public originalIdPublication: string;

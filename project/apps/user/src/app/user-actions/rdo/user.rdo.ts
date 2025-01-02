@@ -13,7 +13,7 @@ export class UserRdo {
   @Expose()
   public avatar?: string;
 
-  @Expose()
+  @Expose({name: 'createdAt'})
   public dateRegistration: string;
 
   @Expose()

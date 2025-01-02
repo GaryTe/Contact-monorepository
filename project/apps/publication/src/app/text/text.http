@@ -1,6 +1,6 @@
 # Создание текст
 POST  http://localhost:2000/api/text/?newsletter=true HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NGYxOGRhYzA5YjM5ZDRkYTdmODlkNSIsImVtYWlsIjoiVmxhZEBtYWlsLmNvbSIsIm5hbWUiOiJWbGFkIFNhem9ub3YiLCJpYXQiOjE3MzQ3MDkzNjMsImV4cCI6MTczNDcwOTQ4M30.cyne7X-dR8NJAITfCGlbuRlWD83Kot94a0JJG5aCoZk
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NmI5Y2Q1ZTVhMWY0ZmMyYTcxMDczNyIsImVtYWlsIjoiVGFueSBTYXpvbm92YSIsIm5hbWUiOiJUYW55QG1haWwuY29tIiwiaWF0IjoxNzM1NDc0MjM0LCJleHAiOjE3MzU0NzQzNTR9.X6is0AljCFfVRGamdcioqlKiTgeVCtH2TJTwXVas5Lk
 Content-Type: application/json
 
 {
@@ -12,19 +12,22 @@ Content-Type: application/json
 
 ###
 # Получение детальной информации по тексту
-GET   http://localhost:2000/api/text/36 HTTP/1.1
+GET   http://localhost:2000/api/text/55 HTTP/1.1
 
 ###
 ## Редактирование текст
-PATCH  http://localhost:2000/api/text/?idText=36 HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NGYxOGRhYzA5YjM5ZDRkYTdmODlkNSIsImVtYWlsIjoiVmxhZEBtYWlsLmNvbSIsIm5hbWUiOiJWbGFkIFNhem9ub3YiLCJpYXQiOjE3MzQwNzM4NDUsImV4cCI6MTczNDA3Mzk2NX0.h-bzfBdvAvdfo_gaOfGeLilouQA9gI4O2zIqY5gV3-U
+PATCH  http://localhost:2000/api/text/?idText=65 HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NmI5Y2Q1ZTVhMWY0ZmMyYTcxMDczNyIsImVtYWlsIjoiVGFueSBTYXpvbm92YSIsIm5hbWUiOiJUYW55QG1haWwuY29tIiwiaWF0IjoxNzM1NDc1MDcxLCJleHAiOjE3MzU0NzUxOTF9.ufzRiAwe3ORJbDZ4N5Xb3kF-X6htWoSgIytn0VRLXGE
 Content-Type: application/json
 
 {
-  "state": "Опубликовано"
+  "tags": [
+    "Vlad",
+    "UnidentifiedRaccoon"
+  ]
 }
 
 ###
 ## Удаление текста
-DELETE   http://localhost:2000/api/text/?idText=36 HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NGYxOGRhYzA5YjM5ZDRkYTdmODlkNSIsImVtYWlsIjoiVmxhZEBtYWlsLmNvbSIsIm5hbWUiOiJWbGFkIFNhem9ub3YiLCJpYXQiOjE3MzQwNzM4NDUsImV4cCI6MTczNDA3Mzk2NX0.h-bzfBdvAvdfo_gaOfGeLilouQA9gI4O2zIqY5gV3-U
+DELETE   http://localhost:2000/api/text/?idText=65 HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NmI5Y2Q1ZTVhMWY0ZmMyYTcxMDczNyIsImVtYWlsIjoiVGFueUBtYWlsLmNvbSIsIm5hbWUiOiJUYW55IFNhem9ub3ZhIiwiaWF0IjoxNzM1NDc1MTUzLCJleHAiOjE3MzU0NzUyNzN9.aGJtJFyYua8mC8ZS_u18bdABlpshX1g751VGBfWoFZY

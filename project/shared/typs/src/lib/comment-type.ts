@@ -12,7 +12,13 @@ export type DataQueryComment = {
 export type DetailInformationComment = {
   id: number;
   text: string;
-  idUser: string;
+  idUser?: string;
+  author?: {
+    id: string,
+    name: string,
+    email: string,
+    avatar: string
+  }
   dataCreation: Date;
   publicationId: number;
 }

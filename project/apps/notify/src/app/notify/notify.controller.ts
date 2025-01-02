@@ -1,5 +1,5 @@
 import { Controller } from '@nestjs/common';
-import { RabbitSubscribe } from '@golevelup/nestjs-rabbitmq';
+import { RabbitRPC } from '@golevelup/nestjs-rabbitmq';
 
 import {RabbitRouting, Exchange, Queue} from '@project/enum';
 import {NotifyService} from './notify.service';
@@ -15,16 +15,35 @@ export class NotifyController {
     private readonly  mailService: MailService
   ) {}
 
-  @RabbitSubscribe({
+  @RabbitRPC({
     exchange: Exchange.ReadmeNotify,
     routingKey: RabbitRouting.AddSubscriber,
     queue: Queue.ReadmeNotify,
   })
-  public async getData(publication: Publication): Promise<void> {
+  public async getData(publication: Publication): Promise<{
+    id: string,
+    name: string,
+    email: string,
+    avatar: string
+  }> {
+    let dataAuthor:{
+      id: string,
+      name: string,
+      email: string,
+      avatar: string
+    };
    const dataUsersList = await this.notifyService.searchUsersList(publication.additional.idUser)
 
    dataUsersList.subscribers.forEach((user: NotifyModel) =>{
-    if(user.id === dataUsersList.author.id) {return}
+    if(user.id === dataUsersList.author.id) {
+      dataAuthor = {
+        id: dataUsersList.author.id,
+        name: dataUsersList.author.name,
+        email: dataUsersList.author.email,
+        avatar: dataUsersList.author.avatar
+      }
+      return
+    }
     delete publication.additional.idUser;
 
     const dataPublication = {
@@ -39,7 +58,8 @@ export class NotifyController {
             author: {
               id: dataUsersList.author.id,
               name: dataUsersList.author.name,
-              email: dataUsersList.author.email
+              email: dataUsersList.author.email,
+              avatar: dataUsersList.author.avatar
             }
           }
           }
@@ -47,5 +67,7 @@ export class NotifyController {
 
     this.mailService.sendNewNotify(dataPublication)
    })
+
+   return dataAuthor
   }
 }

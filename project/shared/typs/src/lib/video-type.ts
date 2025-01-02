@@ -7,13 +7,25 @@ export type DataVideo = {
 }
 
 export type AdditionalData = {
-  idUser: string;
+  idUser?: string;
+  author?: {
+    id: string;
+    name: string;
+    email: string;
+    avatar: string;
+  };
   name: string | null;
   link: string | null;
   tags: string | null;
   state: string;
   repost: string | null;
-  originalIdUser: string | null;
+  originalIdUser?: string | null;
+  originaUser?: {
+    id: string;
+    name: string;
+    email: string;
+    avatar: string;
+  };
   originalIdPublication: string | null;
   dataCreation: Date;
   dataPublication: Date;

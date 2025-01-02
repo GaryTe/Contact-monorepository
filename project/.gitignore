@@ -42,4 +42,7 @@ Thumbs.db
 .nx/workspace-data
 
 # Environments
-*.env
+.env
+
+#uploaded files
+uploads/2024

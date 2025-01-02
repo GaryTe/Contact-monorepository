@@ -5,6 +5,14 @@ class AdditionalData {
   public idUser: string;
 
   @Expose()
+  public author: {
+    id: string,
+    name: string,
+    email: string,
+    avatar: string
+  };
+
+  @Expose()
   @Transform(({value}) => value ? value.split(',') : value)
   public tags: string[];
 
