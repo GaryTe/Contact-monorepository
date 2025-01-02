@@ -77,10 +77,18 @@ public async change(
 
 @Get(':idUser')
 public async show(@Param() param: DataParamUser): Promise<UserRdo> {
-  const dataUser = await this.userActionsService.show(param.idUser);
+  const data = await this.userActionsService.show(param.idUser);
+  const {dataUser, dataPublicationsList} = data;
+
   dataUser.avatar = `${getFullServerPath(this.userConfig.get('HOST'), this.userConfig.get('PORT'))}/${GLOBAL_PEFIX}${dataUser.avatar}`
 
-  return fillDTO(UserRdo, dataUser)
+  return fillDTO(UserRdo, Object.assign(
+    dataUser,
+    {
+      numberOfPublication: dataPublicationsList.length,
+      numberOfSubscriber: 0
+    }
+  ))
 }
 
 @UseGuards(AuthorizationGuard)

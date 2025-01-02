@@ -11,6 +11,14 @@ export class CommentRdo {
   public idUser: string;
 
   @Expose()
+  public author: {
+    id: string,
+    name: string,
+    email: string,
+    avatar: string
+  }
+
+  @Expose()
   public dataCreation: Date;
 
   @Expose()

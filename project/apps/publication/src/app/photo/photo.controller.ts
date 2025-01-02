@@ -24,6 +24,7 @@ import {DataQueryPhoto} from './data-query-photo';
 import {AuthenticationGuard} from '@project/config-user';
 import {UploadFile, PhotoValidationPipe} from '@project/file';
 import {PHOTO_NAME, GLOBAL_PEFIX} from '@project/consts';
+import {Publication} from '@project/typs';
 
 @Controller('/photo')
 export class PhotoController {
@@ -56,7 +57,7 @@ export class PhotoController {
 
   @Get('/:idPhoto')
   public async show(@Param('idPhoto', ParseIntPipe) idPhoto: number): Promise<DetailInformationRdo> {
-    const dataPhoto = await this.photoService.show(Number(idPhoto));
+    const dataPhoto = await this.photoService.show(Number(idPhoto)) as Publication;
     dataPhoto.photo = `${getFullServerPath(process.env.HOST, process.env.PUBLICATION_PORT)}/${GLOBAL_PEFIX}${dataPhoto.photo}`
 
     return fillDTO(DetailInformationRdo, dataPhoto)
@@ -69,7 +70,7 @@ export class PhotoController {
     @Body() dto: UpdatePhotoDto,
     @Query() query: DataQueryPhoto): Promise<PhotoRdo> {
     const [id] = req.headers?.tokenPayload as unknown as string
-    const dataPhoto = await this.photoService.editing({...query, idUser: id}, dto);
+    const dataPhoto = await this.photoService.editing({...query, idUser: id}, dto) as Publication;
     dataPhoto.photo = `${getFullServerPath(process.env.HOST, process.env.PUBLICATION_PORT)}/${GLOBAL_PEFIX}${dataPhoto.photo}`
 
     return fillDTO(PhotoRdo, dataPhoto)
@@ -81,7 +82,7 @@ export class PhotoController {
     @Req() req: Request,
     @Query() query: DataQueryPhoto): Promise<PhotoRdo> {
     const [id] = req.headers?.tokenPayload as unknown as string
-    const dataPhoto = await this.photoService.delet({...query, idUser: id});
+    const dataPhoto = await this.photoService.delet({...query, idUser: id}) as Publication;
     dataPhoto.photo = `${getFullServerPath(process.env.HOST, process.env.PUBLICATION_PORT)}/${GLOBAL_PEFIX}${dataPhoto.photo}`
 
     return fillDTO(PhotoRdo, dataPhoto)

@@ -78,4 +78,25 @@ export class ListPublicationRepository {
       skip: Number(page) > 0 ? Number(page) : undefined
     })
   }
+
+  public async publicationList({
+    idUser
+  }: {
+    idUser: string;
+  }): Promise<Publication[] | []> {
+
+    return await this.client.publication.findMany({
+      where: {
+        additional: {
+          idUser: idUser,
+          state: State.Published,
+        }
+      },
+      include: {
+        additional: true,
+        comments: true,
+        likes: true
+      }
+    })
+  }
 }

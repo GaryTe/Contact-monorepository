@@ -4,8 +4,10 @@ import {Request} from 'express';
 import {RepostService} from './repost.service';
 import {DataQueryRepost} from './data-query-repost';
 import {DetailInformationRdo} from './index';
-import {fillDTO} from '@project/helpers';
+import {fillDTO, getFullServerPath} from '@project/helpers';
 import {AuthenticationGuard} from '@project/config-user';
+import {GLOBAL_PEFIX} from '@project/consts';
+import {Publication} from '@project/typs';
 
 @Controller('/repost')
 export class RepostController {
@@ -20,7 +22,11 @@ export class RepostController {
     @Query() query: DataQueryRepost
   ): Promise<DetailInformationRdo> {
     const [id] = req.headers?.tokenPayload as unknown as string
-    const dataPublication = await this.repostService.create({...query, idUser: id});
+    const dataPublication = await this.repostService.create({...query, idUser: id}) as Publication;
+    if(dataPublication.photo) {
+    dataPublication.photo = `${getFullServerPath(process.env.HOST, process.env.PUBLICATION_PORT)}/${GLOBAL_PEFIX}${dataPublication.photo}`;
+    }
+
     return fillDTO(DetailInformationRdo, dataPublication)
   }
 }

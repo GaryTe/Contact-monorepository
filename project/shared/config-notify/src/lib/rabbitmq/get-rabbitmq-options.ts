@@ -10,6 +10,14 @@ export function getRabbitMQOptions() {
         {
           name: config.get('EXCHANG_NAME'),
           type: config.get('EXCHANG_TYPE')
+        },
+        {
+          name: config.get('EXCHANG_PUBLICATION'),
+          type: config.get('EXCHANG_TYPE')
+        },
+        {
+          name: config.get('EXCHANG_USER'),
+          type: config.get('EXCHANG_TYPE')
         }
       ],
       uri:getRabbitMQConnectionString({

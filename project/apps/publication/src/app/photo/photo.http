@@ -1,5 +1,5 @@
 POST http://localhost:2000/api/photo/upload HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NmI5Y2Q1ZTVhMWY0ZmMyYTcxMDczNyIsImVtYWlsIjoiVGFueSBTYXpvbm92YSIsIm5hbWUiOiJUYW55QG1haWwuY29tIiwiaWF0IjoxNzM1MTI5NTgzLCJleHAiOjE3MzUxMjk3MDN9.Ph1tpoP-b8QOb8-5nFYt-5fNK7dIJ8cUcYsVMETwb1M
+Authorization: Bearer
 Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
 
 ------WebKitFormBoundary7MA4YWxkTrZu0gW
@@ -12,17 +12,17 @@ Content-Type: image/jpg
 ###
 # Создание фото
 POST  http://localhost:2000/api/photo/?newsletter=true HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NmI5Y2Q1ZTVhMWY0ZmMyYTcxMDczNyIsImVtYWlsIjoiVGFueSBTYXpvbm92YSIsIm5hbWUiOiJUYW55QG1haWwuY29tIiwiaWF0IjoxNzM1MTI5NTgzLCJleHAiOjE3MzUxMjk3MDN9.Ph1tpoP-b8QOb8-5nFYt-5fNK7dIJ8cUcYsVMETwb1M
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NmI5Y2Q1ZTVhMWY0ZmMyYTcxMDczNyIsImVtYWlsIjoiVGFueSBTYXpvbm92YSIsIm5hbWUiOiJUYW55QG1haWwuY29tIiwiaWF0IjoxNzM1NDkzNzcxLCJleHAiOjE3MzU0OTM4OTF9.9dD34rAAsmp2WUMn9QLnf0qG0c8q3uWGTya-ljoKufg
 Content-Type: application/json
 
 {
-  "photo": "/upload/2024/12/28c536cd-3b34-4a6e-95f1-84893c79d8ce.jpg",
+  "photo": "/upload/2024/12/b909cf34-9bcd-4f1d-82ee-9854f3b29818.jpg",
   "state": "Опубликовано"
 }
 
 ###
 # Получение детальной информации по фото
-GET   http://localhost:2000/api/photo/21 HTTP/1.1
+GET   http://localhost:2000/api/photo/67 HTTP/1.1
 
 ###
 ## Редактирование фото
@@ -38,5 +38,5 @@ Content-Type: application/json
 
 ###
 ## Удаление фото
-DELETE   http://localhost:2000/api/photo/?idPhoto=40 HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NGYxOGRhYzA5YjM5ZDRkYTdmODlkNSIsImVtYWlsIjoiVmxhZEBtYWlsLmNvbSIsIm5hbWUiOiJWbGFkIFNhem9ub3YiLCJpYXQiOjE3MzQwNzc1MDYsImV4cCI6MTczNDA3NzYyNn0.bK1KwD-L4kOGiY08gjALBOgAfkAi8QS0AUKedewTxAA
+DELETE   http://localhost:2000/api/photo/?idPhoto=67 HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NmI5Y2Q1ZTVhMWY0ZmMyYTcxMDczNyIsImVtYWlsIjoiVGFueUBtYWlsLmNvbSIsIm5hbWUiOiJUYW55IFNhem9ub3ZhIiwiaWF0IjoxNzM1NDk0MDAzLCJleHAiOjE3MzU0OTQxMjN9.k37SFnoy-PjTuKHeygBqjBaPKOKm4sSEzqfaLypFwIY

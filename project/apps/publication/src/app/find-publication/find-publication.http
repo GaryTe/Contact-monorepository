@@ -1,2 +1,2 @@
 # Получение like
-GET   http://localhost:3000/api/find/Vlad HTTP/1.1
+GET   http://localhost:2000/api/find/Это HTTP/1.1

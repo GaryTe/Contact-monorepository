@@ -1,13 +1,17 @@
 import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
+import { RabbitRPC, AmqpConnection } from '@golevelup/nestjs-rabbitmq';
+import { ConsumeMessage } from 'amqplib';
 
 import {BlogUserRepository} from '../blog-user/blog-user.repository';
 import {CreateUserDto, UserServiceInterface} from './index';
-import {DataQueryUser, AccessAndRefreshToken} from '@project/typs';
+import {DataQueryUser, AccessAndRefreshToken, Publication} from '@project/typs';
 import {BlogUserModel, BlogUserEntity} from '../blog-user/index';
 import {BlogRefreshTokenRepository} from '../blog-refresh-token/blog-refresh-token.repository';
 import {AuthenticationUser} from './authentication-user';
 import {UserConfig} from '@project/config-user';
 import {STATIC_FILES_ROUTE, STATIC_IMAGES} from '@project/consts';
+import {RabbitRouting, Exchange, Queue} from '@project/enum';
+import {NotifyConfig} from '@project/config-notify';
 
 @Injectable()
 export class UserActionsService implements UserServiceInterface {
@@ -15,7 +19,9 @@ export class UserActionsService implements UserServiceInterface {
     private readonly blogUserRepository: BlogUserRepository,
     private readonly  blogRefreshTokenRepository: BlogRefreshTokenRepository,
     private readonly authenticationUser: AuthenticationUser,
-    private readonly userConfig: UserConfig
+    private readonly userConfig: UserConfig,
+    private readonly amqpConnection: AmqpConnection,
+    private readonly config: NotifyConfig
   ) {}
 
   public async create(dto: CreateUserDto): Promise<BlogUserModel> {
@@ -67,8 +73,26 @@ export class UserActionsService implements UserServiceInterface {
      );
   }
 
-  public async show(id: string): Promise<BlogUserModel> {
-    return await this.blogUserRepository.findByid(id);
+  public async show(
+    id: string,
+    amqpMsg?: ConsumeMessage
+  ): Promise<{
+    dataUser: BlogUserModel,
+    dataPublicationsList: Publication[] | []
+  }> {
+    const dataUser = await this.blogUserRepository.findByid(id, amqpMsg)
+
+    const dataPublicationsList = await this.amqpConnection
+    .request<Publication[] | []>({
+      exchange: this.config.get('EXCHANG_USER'),
+      routingKey: RabbitRouting.AddUser,
+      payload: dataUser.id
+    })
+
+    return {
+      dataUser,
+      dataPublicationsList
+    }
   }
 
   public async createTokens(datasList: string[]): Promise<AccessAndRefreshToken> {
@@ -88,4 +112,38 @@ export class UserActionsService implements UserServiceInterface {
 
     return parAccessTokenAndRefreshToken
   }
+
+  @RabbitRPC({
+    exchange: Exchange.ReadmePublication,
+    routingKey: RabbitRouting.AddUser,
+    queue: Queue.ReadmePublication
+  })
+  public async authorsList(idList: string[], amqpMsg?: ConsumeMessage): Promise<{
+    id: string,
+    name: string,
+    email: string,
+    avatar: string
+  }[] | null> {
+    const dataAuthorsList = []
+
+    if(idList.length > 0) {
+      for await (const id of idList) {
+      const dataUser = await this.blogUserRepository.findByid(id, amqpMsg);
+
+      if (dataUser) {
+        dataAuthorsList.push({
+        id: dataUser.id,
+        name: dataUser.name,
+        email: dataUser.email,
+        avatar: dataUser.avatar
+      })
+      }
+    }}
+
+    if(dataAuthorsList.length === 0) {
+      return null
+    }
+
+    return dataAuthorsList
+    }
 }

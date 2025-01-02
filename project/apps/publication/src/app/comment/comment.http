@@ -1,6 +1,6 @@
 # Создание Комментария
 POST  http://localhost:2000/api/comment/ HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NGYxOGRhYzA5YjM5ZDRkYTdmODlkNSIsImVtYWlsIjoiVmxhZEBtYWlsLmNvbSIsIm5hbWUiOiJWbGFkIFNhem9ub3YiLCJpYXQiOjE3MzQwODUxMzQsImV4cCI6MTczNDA4NTI1NH0.CRF3CMfpb9m2DiqW3Py1-vq7Efg9L0GUxocuz0_Etxc
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NmI5Y2Q1ZTVhMWY0ZmMyYTcxMDczNyIsImVtYWlsIjoiVGFueUBtYWlsLmNvbSIsIm5hbWUiOiJUYW55IFNhem9ub3ZhIiwiaWF0IjoxNzM1NzQ4NjQ2LCJleHAiOjE3MzU3NDg3NjZ9.vc-KaHPdE65lTzvrRKJTftc1ndEm2y_btyUnhH2NP8g
 Content-Type: application/json
 
 {
@@ -10,9 +10,9 @@ Content-Type: application/json
 
 ###
 # Получение  списка комментариев
-GET   http://localhost:2000/api/comment/30 HTTP/1.1
+GET   http://localhost:2000/api/comment/16 HTTP/1.1
 
 ###
 ## Удаление комментария
-DELETE   http://localhost:2000/api/comment/?idComment=2 HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NGYxOGRhYzA5YjM5ZDRkYTdmODlkNSIsImVtYWlsIjoiVmxhZEBtYWlsLmNvbSIsIm5hbWUiOiJWbGFkIFNhem9ub3YiLCJpYXQiOjE3MzQwODUyNjIsImV4cCI6MTczNDA4NTM4Mn0.phhna01fNLLLRrXc0KORXtuVdK1SuIc7sJCFRp5G3K8
+DELETE   http://localhost:2000/api/comment/?idComment=5 HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NmI5Y2Q1ZTVhMWY0ZmMyYTcxMDczNyIsImVtYWlsIjoiVGFueSBTYXpvbm92YSIsIm5hbWUiOiJUYW55QG1haWwuY29tIiwiaWF0IjoxNzM1NzQ4NzQxLCJleHAiOjE3MzU3NDg4NjF9.-rC_1wPFC6sjw9foyMsTw-8-g3m1zlSaPwqM6maHexU
